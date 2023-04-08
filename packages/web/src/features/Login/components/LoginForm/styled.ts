@@ -26,6 +26,7 @@ export const LoginButton = styled.button.attrs(() => ({ type: 'submit' }))`
   box-shadow: 0px 4px 10px rgba(238, 237, 238, 0.5);
   border-radius: 10px;
   margin-top: 30px;
+  font-size: 1rem;
 `;
 
 export const AgreementWrapper = styled.div`

@@ -17,14 +17,14 @@ export const LoginForm = () => {
 
   return (
     <S.Form onSubmit={(e) => handlerSubmit(e)}>
-      <S.FormTitle>Авторизация</S.FormTitle>
+      <S.FormTitle>Log in</S.FormTitle>
       <InputLabelIcon icon={<AccountCircle />} attachment="login-input">
-        Логин
+        User
       </InputLabelIcon>
       <InputLabelIcon icon={<PasswordIcon />} attachment="password-input">
-        Пароль
+        Password
       </InputLabelIcon>
-      <S.LoginButton>Войти</S.LoginButton>
+      <S.LoginButton>Log in</S.LoginButton>
       <S.AgreementWrapper>
         <Checkbox />
         <S.AgreementP>{agreement}</S.AgreementP>

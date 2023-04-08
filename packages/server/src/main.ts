@@ -4,18 +4,18 @@
  */
 
 import express from 'express';
-import * as path from 'path';
+import morgan from 'morgan';
+import cors from 'cors';
+import { router } from './routes';
 
 const app = express();
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(cors());
+app.use(express.json());
+app.use(morgan('tiny'));
+app.use('/api', router);
+const PORT = 3000;
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to server!' });
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}/api`);
 });
-
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
