@@ -31,10 +31,4 @@ export const LogoutButton = styled.button`
   background-position: center;
   border-radius: 50%;
   margin: 12px 14px;
-  &:hover {
-    cursor: pointer;
-  }
-  &:active {
-    opacity: 60%;
-  }
 `;

@@ -1,39 +1,28 @@
-// import React from 'react';
-// import * as S from './styled';
-
-// interface Props {
-//   attachment: string;
-//   textContent: string;
-// }
-
-// export const InputLabel = ({ attachment, textContent }: Props) => {
-//   return (
-//     <>
-//       <S.InputLabel htmlFor={attachment}>{textContent}</S.InputLabel>
-//       <S.Input id={attachment}></S.Input>
-//     </>
-//   );
-// };
-
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input/Input';
 import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
 
-export const InputLabelIcon = () => {
+interface Props {
+  attachment: string;
+  icon: ReactNode;
+}
+
+export const InputLabelIcon = ({
+  attachment,
+  icon,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
-    <FormControl variant="standard">
-      <InputLabel htmlFor="input-with-icon-adornment">
-        With a start adornment
-      </InputLabel>
+    <FormControl sx={{ minWidth: '18.75rem', mt: '20px' }} variant="standard">
+      <InputLabel htmlFor={attachment}>{children}</InputLabel>
       <Input
-        id="input-with-icon-adornment"
+        required={true}
+        sx={{ minHeight: '2.5rem' }}
+        id={attachment}
         startAdornment={
-          <InputAdornment position="start">
-            {/* <AccountCircle /> */}
-          </InputAdornment>
+          <InputAdornment position="start">{icon}</InputAdornment>
         }
       />
     </FormControl>

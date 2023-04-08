@@ -7,3 +7,11 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
   /* font-weight: 400; */
 }
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 75%;
+}
