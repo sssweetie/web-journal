@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import logout from '../../../../assets/Logout.svg';
 
 export const Header = styled.header`
-  max-width: 72rem;
-  width: 100%;
+  width: 80%;
+  min-width: 26rem;
+  margin-top: 29px;
   height: 3.75rem;
   box-shadow: 0px 4px 10px rgba(238, 237, 238, 0.5);
   border-radius: 10px;
@@ -17,7 +17,6 @@ export const StudyP = styled.p`
   font-size: 1.5rem;
   text-transform: uppercase;
   margin: 0;
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
   color: #0075ff;
   padding: 1rem;
