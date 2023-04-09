@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017');
+const DB_URL = 'mongodb://0.0.0.0:27017/web-journal';
+
+mongoose.connect(DB_URL);
 
 export const db = mongoose.connection;
 

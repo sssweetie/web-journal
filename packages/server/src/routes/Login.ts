@@ -6,8 +6,9 @@ export const loginRouter = Router();
 
 loginRouter.post('/', async (req, res) => {
   try {
-    await LoginController.login(req.body);
-    res.sendStatus(200);
+    const result = await LoginController.login(req.body);
+    if (result === true) res.sendStatus(200);
+    else res.sendStatus(401);
   } catch {
     console.error(error);
     res.sendStatus(422);

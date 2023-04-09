@@ -3,25 +3,44 @@ import * as S from './styled';
 import { InputLabelIcon } from '../InputLabel';
 import PasswordIcon from '@mui/icons-material/Password';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox } from '@mui/material';
+import { loginApi } from '../../loginApi';
+import { httpClient } from '../../services/httpClient';
+import { useFormLogin } from './hooks/useLoginForm';
+import { User } from '@web-journal/libs';
 
-export const LoginForm = () => {
-  const handlerSubmit = (e: FormEvent) => {
-    e.preventDefault();
-  };
+export interface Action {
+  login: (data: User) => Promise<void>;
+  isLogged: boolean;
+}
 
+interface Props {
+  action: Action;
+}
+
+export const LoginForm = ({ action }: Props) => {
   const agreement = `Я подтверждаю согласие на обработку 
   персональных данных в соответствии с условиями Политики 
   конфиденциальности , ознакомился и согласен с условиями 
   Пользовательского соглашения`;
 
+  const { register, handleSubmit } = useFormLogin(action);
+
   return (
-    <S.Form onSubmit={(e) => handlerSubmit(e)}>
+    <S.Form onSubmit={handleSubmit}>
       <S.FormTitle>Log in</S.FormTitle>
-      <InputLabelIcon icon={<AccountCircle />} attachment="login-input">
+      <InputLabelIcon
+        register={register}
+        icon={<AccountCircle />}
+        attachment="login"
+      >
         User
       </InputLabelIcon>
-      <InputLabelIcon icon={<PasswordIcon />} attachment="password-input">
+      <InputLabelIcon
+        register={register}
+        icon={<PasswordIcon />}
+        attachment="password"
+      >
         Password
       </InputLabelIcon>
       <S.LoginButton>Log in</S.LoginButton>

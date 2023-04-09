@@ -3,6 +3,7 @@ import { User } from '@web-journal/libs';
 
 export const LoginController = {
   login: async (data: User) => {
-    await LoginModel.findOne(data);
+    const result = await LoginModel.findOne(data);
+    return result === null ? false : true;
   },
 };

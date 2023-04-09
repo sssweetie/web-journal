@@ -2,12 +2,15 @@
 import { Login } from '../features/Login/Login';
 import styles from './app.module.css';
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 export function App() {
   return (
     <>
-      <Login />
+      <Routes>
+        <Route path="/api/login" element={<Login />} />
+        <Route path="/success" element={<div>hello</div>} />
+      </Routes>
 
       {/* <div role="navigation">
         <ul>
