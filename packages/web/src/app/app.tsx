@@ -1,15 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Login } from '../features/Login/Login';
+import { Teacher } from '../features/Teacher/Teacher';
 import styles from './app.module.css';
+import * as S from './styled';
 
 import { Route, Routes } from 'react-router-dom';
 
 export function App() {
   return (
-    <>
+    <S.Wrapper>
       <Routes>
         <Route path="/api/login" element={<Login />} />
-        <Route path="/success" element={<div>hello</div>} />
+        <Route path="/api/teacher/main" element={<Teacher />} />
       </Routes>
 
       {/* <div role="navigation">
@@ -32,7 +34,7 @@ export function App() {
           element={<Link to="/">Click here to go back to root page.</Link>}
         />
       </Routes> */}
-    </>
+    </S.Wrapper>
   );
 }
 

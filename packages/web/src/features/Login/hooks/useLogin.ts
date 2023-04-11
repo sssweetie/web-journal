@@ -11,7 +11,7 @@ export const useLogin = (loginApi: LoginApi) => {
     try {
       await loginApi.login(data);
       setIsLogged(true);
-      navigate('/success');
+      navigate('/api/teacher/main');
     } catch (error) {
       console.error(error);
     }
