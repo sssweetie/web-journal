@@ -1,12 +1,6 @@
 import React from 'react';
 import * as S from './styled';
-import {
-  Divider,
-  List,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material';
+import { List, ListItemButton, ListItemText } from '@mui/material';
 
 export const NavBar = () => {
   const listButtons = ['Main', 'Journal', 'Messages', 'Public', 'Settings'];
