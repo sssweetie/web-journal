@@ -4,6 +4,9 @@ import { MainContent } from './components/MainContent';
 import { Course } from './components/Course';
 import { PlannedEvent } from './components/PlannedEvent';
 import { NavBar } from './components/NavBar';
+import { useTeacher } from './hooks/useTeacher';
+import { httpClient } from '../services/httpClient';
+import { teacherApi } from './teacherApi';
 
 export const Teacher = () => {
   const courses = [{ name: '', description: '' }];
@@ -13,6 +16,10 @@ export const Teacher = () => {
     name: 'Yarik',
     status: 'Teacher',
   };
+
+  const { getEvents, getLessons, getPersonalInfo, getSettings } = useTeacher(
+    teacherApi(httpClient)
+  );
 
   return (
     <Layout
