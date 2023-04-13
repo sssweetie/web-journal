@@ -2,27 +2,30 @@ import React from 'react';
 import * as S from './styled';
 import { List, ListItemButton, ListItemText } from '@mui/material';
 
-export const NavBar = () => {
-  const listButtons = ['Main', 'Journal', 'Messages', 'Public', 'Settings'];
+interface PersonalInfo {
+  name: string;
+  status: string;
+}
+
+interface Props {
+  settings: Array<string>;
+  personalInfo: PersonalInfo;
+}
+
+export const NavBar = ({ settings, personalInfo }: Props) => {
   return (
     <S.ProfileNavigation>
       <S.ProfileInfo>
         <S.Avatar />
-        <S.FullName>Калачаров Николай</S.FullName>
-        <S.Status>Преподаватель</S.Status>
+        <S.FullName>{personalInfo.name}</S.FullName>
+        <S.Status>{personalInfo.status}</S.Status>
       </S.ProfileInfo>
       <List>
-        {listButtons.map((item) => (
+        {settings.map((item) => (
           <ListItemButton sx={{ paddingTop: 0, paddingBottom: 0 }}>
             <ListItemText primary={item} />
           </ListItemButton>
         ))}
-        {/* <S.ExitDivider>
-          <Divider />
-          <ListItemButton sx={{ marginTop: 0 }}>
-            <ListItemText primary="Exit" />
-          </ListItemButton>
-        </S.ExitDivider> */}
       </List>
     </S.ProfileNavigation>
   );

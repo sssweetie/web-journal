@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { HeaderBar } from '../../../../components/HeaderBar';
 import * as S from './styled';
-import { NavBar } from '../NavBar';
-import { MainContent } from '../MainContent';
 
-export const Layout = () => {
+interface Props {
+  mainContent: ReactNode;
+  navBar: ReactNode;
+}
+
+export const Layout = ({ mainContent, navBar }: Props) => {
   return (
     <>
       <HeaderBar />
       <S.Wrapper>
-        <NavBar />
-        <MainContent />
+        {navBar}
+        {mainContent}
       </S.Wrapper>
     </>
   );

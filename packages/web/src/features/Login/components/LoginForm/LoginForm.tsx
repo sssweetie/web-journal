@@ -5,7 +5,7 @@ import PasswordIcon from '@mui/icons-material/Password';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Checkbox } from '@mui/material';
 import { loginApi } from '../../loginApi';
-import { httpClient } from '../../services/httpClient';
+import { httpClient } from '../../../services/httpClient';
 import { useFormLogin } from './hooks/useLoginForm';
 import { User } from '@web-journal/libs';
 
