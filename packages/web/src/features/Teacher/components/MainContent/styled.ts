@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Arrow from '../../../../assets/Arrow.svg';
 
 export const Wrapper = styled.main`
   min-width: 52.5rem;
@@ -20,37 +19,6 @@ export const Courses = styled.section`
   grid-template-columns: 16.25rem 16.25rem 16.25rem;
   grid-column-gap: 1.25rem;
   padding-top: 20px;
-`;
-
-export const SliderButtons = styled.div`
-  display: flex;
-  width: 3.5rem;
-  align-items: center;
-  justify-content: space-between;
-  float: right;
-  margin: 20px 20px 0 0;
-`;
-
-export const SlideRight = styled.button`
-  background-image: url('../../../../assets/Arrow.svg');
-  border: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  padding: 12px;
-`;
-export const SlideLeft = styled.button`
-  background-image: url('../../../../assets/Arrow.svg');
-  transform: rotate(180deg);
-  border: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  height: 20px;
-  width: 20px;
-  padding: 12px;
 `;
 
 export const Events = styled.section`

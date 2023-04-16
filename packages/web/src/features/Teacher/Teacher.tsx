@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { MainContent } from './components/MainContent';
 import { Course } from './components/Course';
@@ -7,14 +8,34 @@ import { NavBar } from './components/NavBar';
 import { useTeacher } from './hooks/useTeacher';
 import { httpClient } from '../services/httpClient';
 import { teacherApi } from './teacherApi';
+import { Courses, Wrapper, Title } from './components/MainContent/styled';
 
 export const Teacher = () => {
-  const courses = [{ name: '', description: '' }];
-  const plannedEvents = [{ name: '', date: '', lesson: '' }];
-  const settings = ['', ''];
+  const courses = [
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+    { name: 'Eng', description: 'Some description' },
+  ];
+  const plannedEvents = [
+    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
+    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
+    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
+    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
+  ];
+  const settings = ['Main', 'Courses', 'Calendar'];
   const personalInfo = {
     name: 'Yarik',
     status: 'Teacher',
+  };
+
+  const navigate = useNavigate();
+  const navigateHandler = (url: string) => {
+    const urlCapitalize = url.toLocaleLowerCase();
+    navigate(`/api/teacher/${urlCapitalize}`);
   };
 
   const { getEvents, getLessons, getPersonalInfo, getSettings } = useTeacher(
@@ -23,7 +44,13 @@ export const Teacher = () => {
 
   return (
     <Layout
-      navBar={<NavBar personalInfo={personalInfo} settings={settings} />}
+      navBar={
+        <NavBar
+          navigateHandler={navigateHandler}
+          personalInfo={personalInfo}
+          settings={settings}
+        />
+      }
       mainContent={
         <MainContent
           courses={courses.map(
@@ -35,6 +62,16 @@ export const Teacher = () => {
           )}
         />
       }
-    ></Layout>
+      courses={
+        <Wrapper>
+          <Title>My courses</Title>
+          <Courses>
+            {courses.map((course) => (
+              <Course course={course} />
+            ))}
+          </Courses>
+        </Wrapper>
+      }
+    />
   );
 };

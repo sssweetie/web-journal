@@ -10,9 +10,10 @@ interface PersonalInfo {
 interface Props {
   settings: Array<string>;
   personalInfo: PersonalInfo;
+  navigateHandler: (url: string) => void;
 }
 
-export const NavBar = ({ settings, personalInfo }: Props) => {
+export const NavBar = ({ settings, personalInfo, navigateHandler }: Props) => {
   return (
     <S.ProfileNavigation>
       <S.ProfileInfo>
@@ -22,7 +23,10 @@ export const NavBar = ({ settings, personalInfo }: Props) => {
       </S.ProfileInfo>
       <List>
         {settings.map((item) => (
-          <ListItemButton sx={{ paddingTop: 0, paddingBottom: 0 }}>
+          <ListItemButton
+            onClick={() => navigateHandler(item)}
+            sx={{ paddingTop: 0, paddingBottom: 0 }}
+          >
             <ListItemText primary={item} />
           </ListItemButton>
         ))}

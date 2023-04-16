@@ -12,6 +12,11 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  
+  &:hover {
+    transition-duration: 0.3s;
+    transform: translateY(-15px);
+  }
 `;
 
 export const Day = styled.p`
