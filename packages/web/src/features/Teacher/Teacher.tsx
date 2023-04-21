@@ -9,6 +9,7 @@ import { useTeacher } from './hooks/useTeacher';
 import { httpClient } from '../services/httpClient';
 import { teacherApi } from './teacherApi';
 import { Courses, Wrapper, Title } from './components/MainContent/styled';
+import { Settings } from './components/Settings';
 
 export const Teacher = () => {
   const courses = [
@@ -26,7 +27,7 @@ export const Teacher = () => {
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
   ];
-  const settings = ['Main', 'Courses', 'Calendar'];
+  const settings = ['Main', 'Courses', 'Calendar', 'Settings'];
   const personalInfo = {
     name: 'Yarik',
     status: 'Teacher',
@@ -72,6 +73,7 @@ export const Teacher = () => {
           </Courses>
         </Wrapper>
       }
+      settings={<Settings></Settings>}
     />
   );
 };
