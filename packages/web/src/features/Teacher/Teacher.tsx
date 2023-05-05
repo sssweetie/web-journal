@@ -8,7 +8,7 @@ import { NavBar } from './components/NavBar';
 import { useTeacher } from './hooks/useTeacher';
 import { httpClient } from '../services/httpClient';
 import { teacherApi } from './teacherApi';
-import { Courses, Wrapper, Title } from './components/MainContent/styled';
+import { Courses, Title } from './components/MainContent/styled';
 import { Settings } from './components/Settings';
 
 export const Teacher = () => {
@@ -64,16 +64,16 @@ export const Teacher = () => {
         />
       }
       courses={
-        <Wrapper>
+        <>
           <Title>My courses</Title>
           <Courses>
             {courses.map((course) => (
               <Course course={course} />
             ))}
           </Courses>
-        </Wrapper>
+        </>
       }
-      settings={<Settings></Settings>}
+      settings={<Settings />}
     />
   );
 };

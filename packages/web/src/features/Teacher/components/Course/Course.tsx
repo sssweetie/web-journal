@@ -1,5 +1,6 @@
 import React from 'react';
 import * as S from './styled';
+import { useNavigate } from 'react-router-dom';
 
 interface Course {
   name: string;
@@ -11,11 +12,15 @@ interface Props {
 }
 
 export const Course = ({ course }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <S.Wrapper>
-      <S.Background></S.Background>
+      <S.Background />
       <S.Container>
-        <S.CourseName>{course.name}</S.CourseName>
+        <S.CourseName onClick={() => navigate('/api/teacher/course/:id')}>
+          {course.name}
+        </S.CourseName>
         <S.CourseDescription>{course.description}</S.CourseDescription>
       </S.Container>
     </S.Wrapper>

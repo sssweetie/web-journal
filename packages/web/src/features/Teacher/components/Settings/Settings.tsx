@@ -4,7 +4,7 @@ import * as S from './styled';
 
 export const Settings = () => {
   return (
-    <S.PageWrapper>
+    <>
       <h3>Настройки</h3>
       <S.FormWrapper>
         <FormControl variant="standard" disabled>
@@ -33,6 +33,6 @@ export const Settings = () => {
           <Input defaultValue=" " id="mail"></Input>
         </FormControl>
       </S.FormWrapper>
-    </S.PageWrapper>
+    </>
   );
 };

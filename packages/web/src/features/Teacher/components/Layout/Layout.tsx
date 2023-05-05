@@ -18,13 +18,16 @@ export const Layout = ({ mainContent, navBar, courses, settings }: Props) => {
       <HeaderBar />
       <S.Wrapper>
         {navBar}
-        {
+        <S.Test>
+          {' '}
           {
-            '/api/teacher/main': mainContent,
-            '/api/teacher/courses': courses,
-            '/api/teacher/settings': settings,
-          }[location.pathname]
-        }
+            {
+              '/api/teacher/main': mainContent,
+              '/api/teacher/courses': courses,
+              '/api/teacher/settings': settings,
+            }[location.pathname]
+          }
+        </S.Test>
       </S.Wrapper>
     </>
   );

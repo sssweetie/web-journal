@@ -9,7 +9,7 @@ interface Props {
 
 export const MainContent = ({ courses, plannedEvents }: Props) => {
   return (
-    <S.Wrapper>
+    <>
       <Link to="/api/teacher/courses">
         <S.Title>My Courses</S.Title>
       </Link>
@@ -18,6 +18,6 @@ export const MainContent = ({ courses, plannedEvents }: Props) => {
         <S.Title style={{ marginTop: '60px' }}>Event</S.Title>
       </Link>
       <S.Events>{plannedEvents}</S.Events>
-    </S.Wrapper>
+    </>
   );
 };

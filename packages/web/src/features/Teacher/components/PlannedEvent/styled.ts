@@ -12,9 +12,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  
+  transition: 0.3s ease-in-out;
   &:hover {
-    transition-duration: 0.3s;
     transform: translateY(-15px);
   }
 `;
