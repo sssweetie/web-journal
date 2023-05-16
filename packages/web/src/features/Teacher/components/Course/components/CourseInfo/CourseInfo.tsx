@@ -5,20 +5,14 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useCourse } from './useCourse';
+import { courseApi } from './courseApi';
+import { httpClient } from '../../../../../services/httpClient';
 
 export const CourseInfo = () => {
   const navigate = useNavigate();
 
-  function createData(name: string, calories: number, fat: string) {
-    return { name, calories, fat };
-  }
-
-  const rows = [
-    createData('Лабораторная работа 1: Искривление позвоночника', 15, '70%'),
-    createData('Лабораторная работа 2: Искривление позвоночника', 15, '70%'),
-    createData('Лабораторная работа 3: Искривление позвоночника', 15, '70%'),
-  ];
-
+  const { courseInfo } = useCourse(courseApi(httpClient));
   const location = useLocation();
 
   return (
@@ -26,14 +20,13 @@ export const CourseInfo = () => {
       <TableHead>
         <TableRow>
           <TableCell align="left">Lesson</TableCell>
-          <TableCell align="center">Mark</TableCell>
-          <TableCell align="right">Percentage</TableCell>
+          <TableCell align="center">Max Mark</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map((row) => (
+        {courseInfo.labs?.map((lab: any) => (
           <TableRow
-            key={row.name}
+            key={lab.name}
             sx={{
               '&:last-child td, &:last-child th': { border: 0 },
               '&:nth-of-type(odd)': { backgroundColor: '#F9F9FA' },
@@ -47,10 +40,9 @@ export const CourseInfo = () => {
                 '&:hover': { cursor: 'pointer' },
               }}
             >
-              {row.name}
+              {lab.name}
             </TableCell>
-            <TableCell align="center">{row.calories}</TableCell>
-            <TableCell align="right">{row.fat}</TableCell>
+            <TableCell align="center">{lab.maxMark}</TableCell>
           </TableRow>
         ))}
       </TableBody>
