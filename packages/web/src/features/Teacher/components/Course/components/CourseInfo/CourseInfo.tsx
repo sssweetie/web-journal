@@ -4,7 +4,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const CourseInfo = () => {
   const navigate = useNavigate();
@@ -18,6 +18,8 @@ export const CourseInfo = () => {
     createData('Лабораторная работа 2: Искривление позвоночника', 15, '70%'),
     createData('Лабораторная работа 3: Искривление позвоночника', 15, '70%'),
   ];
+
+  const location = useLocation();
 
   return (
     <Table>
@@ -38,7 +40,7 @@ export const CourseInfo = () => {
             }}
           >
             <TableCell
-              onClick={() => navigate('/api/teacher/course/lab')}
+              onClick={() => navigate(`${location.pathname}/lab`)}
               component="th"
               scope="row"
               sx={{

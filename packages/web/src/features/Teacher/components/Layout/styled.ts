@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   margin-top: 20px;
 `;
 
-export const Test = styled.div`
+export const Content = styled.main`
   min-width: 52.5rem;
   max-width: 52.5rem;
   background: #ffffff;

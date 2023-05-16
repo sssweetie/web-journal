@@ -13,7 +13,7 @@ import { Settings } from './components/Settings';
 import { CourseInfo } from './components/Course/components/CourseInfo';
 import { Lab } from './components/Course/components/CourseInfo/components/Lab';
 
-export const Teacher = () => {
+export const Teacher = ({ content }: any) => {
   const courses = [
     { name: 'Eng', description: 'Some description' },
     { name: 'Eng', description: 'Some description' },
@@ -47,6 +47,7 @@ export const Teacher = () => {
 
   return (
     <Layout
+      content={content}
       navBar={
         <NavBar
           navigateHandler={navigateHandler}
@@ -54,30 +55,6 @@ export const Teacher = () => {
           settings={settings}
         />
       }
-      mainContent={
-        <MainContent
-          courses={courses.map(
-            (course, index) => index < 3 && <Course course={course} />
-          )}
-          plannedEvents={plannedEvents.map(
-            (plannedEvent, index) =>
-              index < 4 && <PlannedEvent plannedEvent={plannedEvent} />
-          )}
-        />
-      }
-      courses={
-        <>
-          <Title>My courses</Title>
-          <Courses>
-            {courses.map((course) => (
-              <Course course={course} />
-            ))}
-          </Courses>
-        </>
-      }
-      settings={<Settings />}
-      courseInfo={<CourseInfo />}
-      lab={<Lab />}
     />
   );
 };
