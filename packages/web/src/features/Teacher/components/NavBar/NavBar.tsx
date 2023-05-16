@@ -4,12 +4,13 @@ import { List, ListItemButton, ListItemText } from '@mui/material';
 
 interface PersonalInfo {
   name: string;
-  status: string;
+  mail: string;
+  link: string;
 }
 
 interface Props {
   settings: Array<string>;
-  personalInfo: PersonalInfo;
+  personalInfo: PersonalInfo | undefined;
   navigateHandler: (url: string) => void;
 }
 
@@ -18,12 +19,13 @@ export const NavBar = ({ settings, personalInfo, navigateHandler }: Props) => {
     <S.ProfileNavigation>
       <S.ProfileInfo>
         <S.Avatar />
-        <S.FullName>{personalInfo.name}</S.FullName>
-        <S.Status>{personalInfo.status}</S.Status>
+        <S.FullName>{personalInfo?.name}</S.FullName>
+        <S.Status>Teacher</S.Status>
       </S.ProfileInfo>
       <List>
-        {settings.map((item) => (
+        {settings.map((item, index) => (
           <ListItemButton
+            key={index}
             onClick={() => navigateHandler(item)}
             sx={{ paddingTop: 0, paddingBottom: 0 }}
           >

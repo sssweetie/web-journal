@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 interface CourseApi {
   getCourse: (id: string | undefined) => Promise<any>;
 }

@@ -8,7 +8,6 @@ export const CoursesController = {
 
   getAllCourses: async () => {
     const result = await CoursesModel.find({});
-
     return result;
   },
 };

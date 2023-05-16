@@ -7,7 +7,6 @@ import { Calendar } from '../features/Calendar';
 import { CourseInfo } from '../features/Teacher/components/Course/components/CourseInfo';
 import { MainContent } from '../features/Teacher/components/MainContent';
 import { Course } from '../features/Teacher/components/Course';
-import { PlannedEvent } from '../features/Teacher/components/PlannedEvent';
 import { Lab } from '../features/Teacher/components/Course/components/CourseInfo/components/Lab';
 import {
   Courses,
@@ -33,7 +32,7 @@ export function App() {
       <Routes>
         <Route path="/api/login" element={<Login />} />
         <Route
-          path="/api/teacher/main"
+          path="/api/teacher/:teacherId/main"
           element={
             <Teacher
               content={
@@ -43,7 +42,7 @@ export function App() {
           }
         />
         <Route
-          path="/api/teacher/courses"
+          path="/api/teacher/:teacherId/courses"
           element={
             <Teacher
               content={
@@ -59,17 +58,17 @@ export function App() {
             />
           }
         />
-        <Route path="/api/teacher/calendar" element={<Calendar />} />
+        <Route path="/api/teacher/:teacherId/calendar" element={<Calendar />} />
         <Route
-          path="/api/teacher/settings"
+          path="/api/teacher/:teacherId/settings"
           element={<Teacher content={<Settings />} />}
         />
         <Route
-          path="/api/teacher/course/:courseId"
+          path="/api/teacher/:teacherId/course/:courseId"
           element={<Teacher content={<CourseInfo />} />}
         />
         <Route
-          path="/api/teacher/course/:courseId/lab"
+          path="/api/teacher/:teacherId/course/:courseId/lab"
           element={<Teacher content={<Lab />} />}
         />
       </Routes>

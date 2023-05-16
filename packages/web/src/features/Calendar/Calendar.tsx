@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import * as S from './styled';
 import { SliderButtons } from '../../components/SliderButtons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
 export const Calendar = () => {
+  const params = useParams();
+
   const monthsName = [
     'January',
     'February',
@@ -71,7 +74,9 @@ export const Calendar = () => {
   return (
     <S.Wrapper>
       <S.CurrentMonth>
-        <Link to="/api/teacher/main">{monthsName[month]}</Link>
+        <Link to={`/api/teacher/${params.teacherId}/main`}>
+          {monthsName[month]}
+        </Link>
         <SliderButtons
           leftButtonFunction={getPreviousNextMonth}
           rightButtonFunction={getPreviousNextMonth}
@@ -82,16 +87,20 @@ export const Calendar = () => {
 
       {generateCalendar().map((rowArray, rowIndex) => (
         <S.Week>
-          {rowArray.map((day) => {
+          {rowArray.map((day, index) => {
             if (rowIndex === 0) {
-              return <S.FirstDays>{day}</S.FirstDays>;
+              return <S.FirstDays key={index}>{day}</S.FirstDays>;
             } else if (
               day === Number(activeDay.toString().split(' ')[2]) &&
               activeDay.getMonth() === new Date().getMonth()
             ) {
-              return <S.TodayDay>{day}</S.TodayDay>;
+              return <S.TodayDay key={index}>{day}</S.TodayDay>;
             } else {
-              return day !== -1 ? <S.Day>{day}</S.Day> : <div></div>;
+              return day !== -1 ? (
+                <S.Day key={index}>{day}</S.Day>
+              ) : (
+                <div></div>
+              );
             }
           })}
         </S.Week>
