@@ -7,7 +7,7 @@ interface TeacherApi {
 
 export const useTeacher = (teacherApi: TeacherApi) => {
   const params = useParams();
-  const [teacher, setTeacher] = useState();
+  const [teacher, setTeacher] = useState<any>({});
 
   const getPersonalInfo = async () => {
     try {
