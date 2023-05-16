@@ -31,27 +31,23 @@ export const Lab = () => {
     createData('Токарев А.А.', '16.05.2023', '10'),
   ];
 
-  const clickHandler = () => {
+  const handleClick = () => {
     setOpen(true);
   };
 
-  const onClick = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
   return (
     <>
       <FormControl fullWidth>
-        <InputLabel id="select-status-label">Age</InputLabel>
+        <InputLabel id="select-status-label">Status</InputLabel>
         <Select
           labelId="select-status-label"
           id="select-status"
           value={status}
-          label="Age"
+          label="Status"
           onChange={handleChange}
         >
           <MenuItem value={'checked'}>checked</MenuItem>
@@ -88,13 +84,13 @@ export const Lab = () => {
               <TableCell align="center">{row.date}</TableCell>
               <TableCell align="center">{row.mark}</TableCell>
               <TableCell align="right">
-                <button onClick={onClick}>check hero</button>
+                <button onClick={handleClick}>check hero</button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <ModalInfo open={open} onClose={onClose}></ModalInfo>
+      <ModalInfo open={open} onClose={handleClose}></ModalInfo>
     </>
   );
 };
