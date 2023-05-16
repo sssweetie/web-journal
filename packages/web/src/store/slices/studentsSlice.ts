@@ -43,7 +43,7 @@ const studentsSlice = createSlice({
       state.students.push(action.payload.student);
     },
     getStudents(state, action) {
-      console.log('123');
+   
     },
   },
 });

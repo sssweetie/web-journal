@@ -14,28 +14,19 @@ import {
   Title,
 } from '../features/Teacher/components/MainContent/styled';
 import { Settings } from '../features/Teacher/components/Settings';
+import { useApp } from './useApp';
+import { appApi } from './appApi';
+import { httpClient } from '../features/services/httpClient';
 
 export function App() {
-  const courses = [
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-  ];
+  const { courses } = useApp(appApi(httpClient));
+
   const plannedEvents = [
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
     { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
   ];
-  const settings = ['Main', 'Courses', 'Calendar', 'Settings'];
-  const personalInfo = {
-    name: 'Yarik',
-    status: 'Teacher',
-  };
 
   return (
     <S.Wrapper>
@@ -46,15 +37,7 @@ export function App() {
           element={
             <Teacher
               content={
-                <MainContent
-                  courses={courses.map(
-                    (course, index) => index < 3 && <Course course={course} />
-                  )}
-                  plannedEvents={plannedEvents.map(
-                    (plannedEvent, index) =>
-                      index < 4 && <PlannedEvent plannedEvent={plannedEvent} />
-                  )}
-                />
+                <MainContent courses={courses} plannedEvents={plannedEvents} />
               }
             />
           }
@@ -67,7 +50,7 @@ export function App() {
                 <>
                   <Title>My courses</Title>
                   <Courses>
-                    {courses.map((course) => (
+                    {courses.map((course: any) => (
                       <Course course={course} />
                     ))}
                   </Courses>

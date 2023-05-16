@@ -5,4 +5,10 @@ export const CoursesController = {
     const result = await CoursesModel.findById(id);
     return result;
   },
+
+  getAllCourses: async () => {
+    const result = await CoursesModel.find({});
+
+    return result;
+  },
 };

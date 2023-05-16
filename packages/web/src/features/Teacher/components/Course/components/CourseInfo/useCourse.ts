@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
+import { useParams, useLocation } from 'react-router-dom';
 interface CourseApi {
-  getCourse: () => Promise<any>;
+  getCourse: (id: string | undefined) => Promise<any>;
 }
 
 export const useCourse = (courseApi: CourseApi) => {
+  const params = useParams();
+
   const [courseInfo, setCourseInfo] = useState<any>({});
   const getCourseInfo = async () => {
     try {
-      const res = await courseApi.getCourse();
+      const res = await courseApi.getCourse(params.courseId);
       setCourseInfo(res);
     } catch (err) {
       console.error(err);

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 interface Course {
   name: string;
   description: string;
+  _id: string;
 }
 
 interface Props {
@@ -19,9 +20,8 @@ export const Course = ({ course }: Props) => {
       <S.Background />
       <S.Container>
         <S.CourseName
-          onClick={() =>
-            navigate(`/api/teacher/course/646390b8b668b43d4d0ca89e`)
-          }
+          id={course._id}
+          onClick={() => navigate(`/api/teacher/course/${course._id}`)}
         >
           {course.name}
         </S.CourseName>

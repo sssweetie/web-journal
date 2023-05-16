@@ -5,4 +5,4 @@ import { Router } from 'express';
 export const router = Router();
 
 router.use('/login', loginRouter);
-router.use('/teacher/course', coursesRouter);
+router.use('/teacher', coursesRouter);

@@ -3,9 +3,19 @@ import { CoursesController } from '../controllers/Courses';
 
 export const coursesRouter = Router();
 
-coursesRouter.get('/:id', async (req, res) => {
+coursesRouter.get('/course/:id', async (req, res) => {
   try {
     const result = await CoursesController.getData(req.params.id);
+    res.status(200).send(result);
+  } catch {
+    res.status(400);
+  }
+});
+
+coursesRouter.get('/main', async (req, res) => {
+  try {
+    const result = await CoursesController.getAllCourses();
+
     res.status(200).send(result);
   } catch {
     res.status(400);

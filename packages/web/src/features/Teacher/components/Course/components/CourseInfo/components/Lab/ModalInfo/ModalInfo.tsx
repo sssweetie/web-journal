@@ -16,7 +16,7 @@ export const ModalInfo: React.FC<Props> = ({ open, onClose }) => {
 
   const onSubmit = (data: any) => {
     onClose();
-    console.log(data);
+
   };
 
   return (

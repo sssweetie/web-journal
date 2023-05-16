@@ -1,10 +1,8 @@
 import { AxiosInstance } from 'axios';
 
 export const courseApi = (httpClient: AxiosInstance) => ({
-  getCourse: async () => {
-    const response = await httpClient.get(
-      '/teacher/course/646390b8b668b43d4d0ca89e'
-    );
+  getCourse: async (id: string | undefined) => {
+    const response = await httpClient.get(`/teacher/course/${id}`);
     return response.data;
   },
 });
