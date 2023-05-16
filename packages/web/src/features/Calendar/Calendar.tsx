@@ -89,7 +89,6 @@ export const Calendar = () => {
               day === Number(activeDay.toString().split(' ')[2]) &&
               activeDay.getMonth() === new Date().getMonth()
             ) {
-              console.log(activeDay.toString());
               return <S.TodayDay>{day}</S.TodayDay>;
             } else {
               return day !== -1 ? <S.Day>{day}</S.Day> : <div></div>;

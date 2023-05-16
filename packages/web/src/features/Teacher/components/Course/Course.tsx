@@ -18,7 +18,7 @@ export const Course = ({ course }: Props) => {
     <S.Wrapper>
       <S.Background />
       <S.Container>
-        <S.CourseName onClick={() => navigate('/api/teacher/course/:id')}>
+        <S.CourseName onClick={() => navigate('/api/teacher/course')}>
           {course.name}
         </S.CourseName>
         <S.CourseDescription>{course.description}</S.CourseDescription>

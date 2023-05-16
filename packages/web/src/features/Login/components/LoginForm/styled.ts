@@ -28,16 +28,3 @@ export const LoginButton = styled.button.attrs(() => ({ type: 'submit' }))`
   margin-top: 30px;
   font-size: 1rem;
 `;
-
-export const AgreementWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  max-width: 18.75rem;
-  margin-top: 20px;
-`;
-
-export const AgreementP = styled.p`
-  margin: 0;
-  font-size: 0.625rem;
-  line-height: 13px;
-`;
