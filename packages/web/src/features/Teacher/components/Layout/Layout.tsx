@@ -9,6 +9,7 @@ interface Props {
   courses: ReactNode;
   settings: ReactNode;
   courseInfo: ReactNode;
+  lab: ReactNode;
 }
 
 export const Layout = ({

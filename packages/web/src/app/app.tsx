@@ -16,6 +16,7 @@ export function App() {
         <Route path="/api/teacher/calendar" element={<Calendar />} />
         <Route path="/api/teacher/settings" element={<Teacher />} />
         <Route path="/api/teacher/course" element={<Teacher />} />
+        <Route path="/api/teacher/course/lab" element={<Teacher />} />
       </Routes>
     </S.Wrapper>
   );

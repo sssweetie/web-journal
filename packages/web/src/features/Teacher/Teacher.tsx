@@ -11,6 +11,7 @@ import { teacherApi } from './teacherApi';
 import { Courses, Title } from './components/MainContent/styled';
 import { Settings } from './components/Settings';
 import { CourseInfo } from './components/Course/components/CourseInfo';
+import { Lab } from './components/Course/components/CourseInfo/components';
 
 export const Teacher = () => {
   const courses = [
@@ -76,6 +77,7 @@ export const Teacher = () => {
       }
       settings={<Settings />}
       courseInfo={<CourseInfo />}
+      lab={<Lab />}
     />
   );
 };
