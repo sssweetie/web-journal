@@ -5,15 +5,15 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
-
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { ModalInfo } from './ModalInfo';
 
 export const Lab = () => {
   const [status, setStatus] = React.useState('');
+  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
@@ -30,6 +30,19 @@ export const Lab = () => {
     createData('Токарев А.А.', '16.05.2023', '10'),
     createData('Токарев А.А.', '16.05.2023', '10'),
   ];
+
+  const clickHandler = () => {
+    setOpen(true);
+  };
+
+  const onClick = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <FormControl fullWidth>
@@ -75,12 +88,13 @@ export const Lab = () => {
               <TableCell align="center">{row.date}</TableCell>
               <TableCell align="center">{row.mark}</TableCell>
               <TableCell align="right">
-                <button>check hero</button>
+                <button onClick={onClick}>check hero</button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <ModalInfo open={open} onClose={onClose}></ModalInfo>
     </>
   );
 };
