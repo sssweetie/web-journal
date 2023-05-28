@@ -5,6 +5,7 @@ interface PlannedEvent {
   name: string;
   lesson: string;
   date: string;
+  backgroundColor: string;
 }
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 
 export const PlannedEvent = ({ plannedEvent }: Props) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper $backgroundColor={plannedEvent.backgroundColor}>
       <S.Day>{plannedEvent.date}</S.Day>
       <S.LessonName>{plannedEvent.name}</S.LessonName>
       <S.LessonNumber>{plannedEvent.lesson}</S.LessonNumber>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ $backgroundColor: string }>`
   width: 10rem;
   height: 10rem;
-  border: 1px solid #0075ff;
+  border: 1px solid #cccccc;
   box-shadow: 0px 4px 10px rgba(238, 237, 238, 0.5);
   border-radius: 10px;
-  background-color: #96c6ff;
+  background-color: ${(props) => props.$backgroundColor};
   display: flex;
   flex-direction: column;
   align-items: center;

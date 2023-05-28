@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-interface Group {
+interface GroupsId {
   type: Schema.Types.ObjectId;
   ref: string;
 }
@@ -8,11 +8,13 @@ interface Group {
 interface Lab {
   name: string;
   maxMark: number;
+  passed: any[];
+  unpassed: any[];
 }
 
 export interface Courses {
   name: string;
-  groupsId: Array<Group>;
+  groupsId: Array<GroupsId>;
   teacherId: Schema.Types.ObjectId;
   labs: Array<Lab>;
 }

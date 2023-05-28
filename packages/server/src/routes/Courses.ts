@@ -12,10 +12,9 @@ coursesRouter.get('/course/:id', async (req, res) => {
   }
 });
 
-coursesRouter.get('/main', async (req, res) => {
+coursesRouter.get('/:teacherId/main', async (req, res) => {
   try {
-    const result = await CoursesController.getAllCourses();
-
+    const result = await CoursesController.getAllCourses(req.params.teacherId);
     res.status(200).send(result);
   } catch {
     res.status(400);

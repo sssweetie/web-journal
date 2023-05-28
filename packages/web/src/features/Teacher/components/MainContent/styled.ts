@@ -4,7 +4,7 @@ export const Title = styled.p`
   margin: 0;
 `;
 
-export const Courses = styled.section`
+export const CoursesSection = styled.section`
   display: grid;
   grid-template-columns: 16.25rem 16.25rem 16.25rem;
   grid-column-gap: 1.25rem;
