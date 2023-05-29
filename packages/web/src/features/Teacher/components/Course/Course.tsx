@@ -21,6 +21,7 @@ interface Props {
 export const Course = ({ data }: Props) => {
   const navigate = useNavigate();
   const params = useParams();
+  console.log(params);
   return (
     <S.Wrapper>
       <S.Background />
@@ -29,7 +30,7 @@ export const Course = ({ data }: Props) => {
           id={data.courseData._id}
           onClick={() =>
             navigate(
-              `/api/teacher/${params.teacherId}/course/${data.courseData._id}/${data.courseData.groupID}`
+              `/api/teacher/${params.teacherId}/course/${data.courseData._id}`
             )
           }
         >

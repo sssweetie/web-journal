@@ -68,11 +68,11 @@ export function App() {
           element={<Teacher content={<Settings />} />}
         />
         <Route
-          path="/api/teacher/:teacherId/course/:courseId/:groupID"
+          path="/api/teacher/:teacherId/course/:courseId"
           element={<Teacher content={<CourseInfo />} />}
         />
         <Route
-          path="/api/teacher/:teacherId/course/:courseId/:groupID/lab/:labID"
+          path="/api/teacher/:teacherId/course/:courseId/lab/:labId"
           element={<Teacher content={<Lab />} />}
         />
       </Routes>

@@ -4,17 +4,40 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useCourse } from './useCourse';
 import { courseApi } from './courseApi';
 import { httpClient } from '../../../../../services/httpClient';
 
+// interface ILab {
+//   pass: IPass[];
+//   unpass: IUnpass[];
+//   name: string;
+
+// }
+
 export const CourseInfo = () => {
   const navigate = useNavigate();
 
+  const onClick = (lab: any) => {
+    const studentsId = lab.passed
+      .concat(lab.unpassed)
+      .map((homework: any) => homework._id);
+
+    navigate(
+      `${location.pathname}/lab/${lab._id}?students=${studentsId.join(',')}`,
+      {
+        state: {
+          passed: lab.passed,
+          unpassed: lab.unpassed,
+        },
+      }
+    );
+  };
+
   const { courseInfo } = useCourse(courseApi(httpClient));
   const location = useLocation();
-
+  console.log(courseInfo);
   return (
     <Table>
       <TableHead>
@@ -33,7 +56,7 @@ export const CourseInfo = () => {
             }}
           >
             <TableCell
-              onClick={() => navigate(`${location.pathname}/lab`)}
+              onClick={() => onClick(lab)}
               component="th"
               scope="row"
               sx={{

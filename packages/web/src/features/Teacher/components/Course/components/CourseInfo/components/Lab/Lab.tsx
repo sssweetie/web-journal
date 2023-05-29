@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -12,33 +12,31 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
 import { useAppDispatch } from '../../../../../../../../store/hooks';
 import { useAppSelector } from '../../../../../../../../store/hooks';
+import { httpClient } from 'packages/web/src/features/services/httpClient';
+import { useLab } from './useLab';
+import { labApi } from './labApi';
 
 export const Lab = () => {
   const [status, setStatus] = React.useState('unchecked');
   const [open, setOpen] = React.useState(false);
-  const students = useAppSelector((state) => state.students.students);
-  const dispatch = useAppDispatch();
+  const [students, setStudents] = React.useState([]);
+
+  // const students = useAppSelector((state) => state.students.students);
+  // const dispatch = useAppDispatch();
+
+  const location = useLocation();
+  const { getStudents } = useLab(labApi(httpClient));
+
+  useEffect(() => {
+    const res = getStudents();
+    console.log(res);
+  }, []);
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
   };
 
   const navigate = useNavigate();
-
-  function createData(
-    name: string,
-    date: string,
-    checked: string,
-    mark: string
-  ) {
-    return { name, date, checked, mark };
-  }
-
-  // const rows = [
-  //   createData('Токарев А.А.', '16.05.2023', 'checked', '10'),
-  //   createData('Токарев А.А.', '16.05.2023', 'checked', '10'),
-  //   createData('Токарев А.А.', '16.05.2023', 'unchecked', '10'),
-  // ];
 
   const handleClick = () => {
     setOpen(true);
@@ -85,7 +83,11 @@ export const Lab = () => {
                 }}
               >
                 <TableCell
-                  onClick={() => navigate('/api/teacher/course/lab')}
+                  onClick={() =>
+                    navigate(
+                      '/api/teacher/:teacherId/course/:courseId/lab/:labId/'
+                    )
+                  }
                   component="th"
                   scope="row"
                   sx={{
