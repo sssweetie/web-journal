@@ -1,22 +1,46 @@
 import { ObjectId } from 'mongoose';
-import { useLocation, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface ILabApi {
   getStudents: (query: string) => Promise<any>;
 }
 
+export interface IHomework {
+  date: any;
+  name: string;
+  passed: boolean;
+  checked: string;
+  mark: number;
+  comment: string;
+  _id: ObjectId;
+}
+
 export const useLab = (labApi: ILabApi) => {
+  const [students, setStudents] = useState<any>([]);
+
   const location = useLocation();
-  console.log(location.search);
 
   const getStudents = async () => {
     try {
       const res = await labApi.getStudents(location.search);
-      console.log(res);
-    } catch {
-      console.log('error students');
+      const homework: IHomework[] = location.state.homework;
+
+      const students = homework.map((item: IHomework) => {
+        const findItem = res.data.find(
+          (dataItem: any) => dataItem._id === item._id
+        );
+        return { ...item, ...findItem };
+      });
+
+      setStudents(students);
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  return { getStudents };
+  useEffect(() => {
+    getStudents();
+  }, []);
+  return { students };
 };

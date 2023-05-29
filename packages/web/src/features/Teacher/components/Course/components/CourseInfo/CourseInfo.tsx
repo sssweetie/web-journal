@@ -4,32 +4,22 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCourse } from './useCourse';
 import { courseApi } from './courseApi';
 import { httpClient } from '../../../../../services/httpClient';
-
-// interface ILab {
-//   pass: IPass[];
-//   unpass: IUnpass[];
-//   name: string;
-
-// }
 
 export const CourseInfo = () => {
   const navigate = useNavigate();
 
   const onClick = (lab: any) => {
-    const studentsId = lab.passed
-      .concat(lab.unpassed)
-      .map((homework: any) => homework._id);
+    const studentsId = lab.homework.map((homework: any) => homework._id);
 
     navigate(
       `${location.pathname}/lab/${lab._id}?students=${studentsId.join(',')}`,
       {
         state: {
-          passed: lab.passed,
-          unpassed: lab.unpassed,
+          homework: lab.homework,
         },
       }
     );

@@ -1,36 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
-import { useAppDispatch } from '../../../../../../../../store/hooks';
-import { useAppSelector } from '../../../../../../../../store/hooks';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
-import { useLab } from './useLab';
+import { IHomework, useLab } from './useLab';
 import { labApi } from './labApi';
 
 export const Lab = () => {
-  const [status, setStatus] = React.useState('unchecked');
+  const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
-  const [students, setStudents] = React.useState([]);
 
-  // const students = useAppSelector((state) => state.students.students);
-  // const dispatch = useAppDispatch();
-
-  const location = useLocation();
-  const { getStudents } = useLab(labApi(httpClient));
-
-  useEffect(() => {
-    const res = getStudents();
-    console.log(res);
-  }, []);
+  const { students } = useLab(labApi(httpClient));
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
@@ -57,25 +45,27 @@ export const Lab = () => {
           label="Status"
           onChange={handleChange}
         >
-          <MenuItem value={'checked'}>checked</MenuItem>
-          <MenuItem value={'unchecked'}>unchecked</MenuItem>
-          <MenuItem value={'all'}>all</MenuItem>
+          <MenuItem value={'Проверено'}>Проверено</MenuItem>
+          <MenuItem value={'Не проверено'}>Не проверено</MenuItem>
+          <MenuItem value={'Все'}>Все</MenuItem>
         </Select>
       </FormControl>
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="center">Date</TableCell>
-            <TableCell align="center">Mark</TableCell>
-            <TableCell align="center">Checked</TableCell>
-            <TableCell align="right">Сheck</TableCell>
+            <TableCell align="center">Дата</TableCell>
+            <TableCell align="center">Отметка</TableCell>
+            <TableCell align="center">Статус проверки</TableCell>
+            <TableCell align="right">Проверить</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {students
-            .filter((row: any) => row.checked === status || status === 'all')
-            .map((row: any) => (
+            .filter(
+              (row: IHomework) => row.checked === status || status === 'Все'
+            )
+            .map((row: IHomework) => (
               <TableRow
                 key={row.name}
                 sx={{
