@@ -20,8 +20,6 @@ export const CourseInfo = () => {
     );
   };
 
-  // const select = useAppSelector((state) => state.courses.courseInfo);
-
   const { courseInfo } = useCourse(courseApi(httpClient));
 
   const location = useLocation();

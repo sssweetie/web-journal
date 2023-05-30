@@ -1,33 +1,20 @@
 import * as S from './styled';
-import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Course } from '../Course';
 import { PlannedEvent } from '../PlannedEvent';
-import { getCourses } from 'packages/web/src/utils';
 import { httpClient } from '../../../services/httpClient';
 import { IPlannedEvent } from '@web-journal/libs';
+import { useCourses } from '../Courses/useCourses';
+import { coursesApi } from '../Courses/coursesApi';
 
 interface Props {
   plannedEvents: IPlannedEvent[];
 }
 
 export const MainContent = ({ plannedEvents }: Props) => {
-  const [courses, setCourses] = useState([]);
+  const { courses } = useCourses(coursesApi(httpClient));
 
   const params = useParams();
-
-  const loadData = async () => {
-    const data = await getCourses(httpClient, params.teacherId);
-    const array = data.courseData.map((course: any, index: number) => ({
-      courseData: course,
-      groupData: data.groups[index],
-    }));
-    setCourses(array);
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   return (
     <>

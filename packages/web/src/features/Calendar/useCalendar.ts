@@ -3,17 +3,21 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export interface ICalendarApi {
-  get: (id: string) => any;
+  get: (teacherId: string | undefined) => Promise<any>;
 }
 
 export const useCalendar = (calendarApi: ICalendarApi) => {
   const params = useParams();
-  console.log(params);
+
   const [schedule, setSchedule] = useState<ISchedule[]>([]);
 
   const getSchedule = async () => {
-    const res = await calendarApi.get('qwe');
-    setSchedule(res);
+    try {
+      const res = await calendarApi.get(params.teacherId);
+      setSchedule(res.events);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

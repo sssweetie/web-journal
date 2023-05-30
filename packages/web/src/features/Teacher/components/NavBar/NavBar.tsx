@@ -5,7 +5,7 @@ import { Teacher } from '@web-journal/libs';
 
 interface Props {
   settings: Array<string>;
-  personalInfo: Teacher | undefined;
+  personalInfo: any;
   navigateHandler: (url: string) => void;
 }
 
@@ -14,7 +14,7 @@ export const NavBar = ({ settings, personalInfo, navigateHandler }: Props) => {
     <S.ProfileNavigation>
       <S.ProfileInfo>
         <S.Avatar />
-        <S.FullName>{personalInfo?.name}</S.FullName>
+        <S.FullName>{personalInfo.teacher?.name}</S.FullName>
         <S.Status>Teacher</S.Status>
       </S.ProfileInfo>
       <List>

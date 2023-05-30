@@ -18,7 +18,7 @@ export const useTeacher = (teacherApi: TeacherApi) => {
         teacher: res._doc,
       };
 
-      console.log(res);
+      console.log(teacher);
       setTeacher(teacher);
     } catch (err) {
       console.error(err);
