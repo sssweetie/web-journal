@@ -4,6 +4,7 @@ import { SliderButtons } from '../../components/SliderButtons';
 import { Link, useParams } from 'react-router-dom';
 
 export const Calendar = () => {
+  
   const params = useParams();
 
   const monthsName = [
@@ -20,6 +21,7 @@ export const Calendar = () => {
     'November',
     'December',
   ];
+  
   const daysName = [
     'Monday',
     'Tuesday',

@@ -18,7 +18,7 @@ export const CurrentMonth = styled.header`
 
 export const Day = styled.div`
   padding: 10px;
-  background-color: #96c6ff;
+  background-color: #cccccc;
   width: 130px;
   height: 130px;
   margin-top: 5px;
@@ -35,16 +35,17 @@ export const FirstDays = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 200;
   width: 150px;
   height: 40px;
   margin-top: 10px;
-  background-color: #feae3a;
-  opacity: 80%;
+  /* background-color: #999999; */
+  opacity: 60%;
 `;
 
 export const TodayDay = styled.div`
   padding: 10px;
-  background-color: #fe71c6;
+  background-color: #6699ff;
   width: 130px;
   height: 130px;
   margin-top: 5px;

@@ -1,15 +1,9 @@
 import React from 'react';
 import * as S from './styled';
-
-interface PlannedEvent {
-  name: string;
-  lesson: string;
-  date: string;
-  backgroundColor: string;
-}
+import { IPlannedEvent } from '@web-journal/libs';
 
 interface Props {
-  plannedEvent: PlannedEvent;
+  plannedEvent: IPlannedEvent;
 }
 
 export const PlannedEvent = ({ plannedEvent }: Props) => {
@@ -17,7 +11,7 @@ export const PlannedEvent = ({ plannedEvent }: Props) => {
     <S.Wrapper $backgroundColor={plannedEvent.backgroundColor}>
       <S.Day>{plannedEvent.date}</S.Day>
       <S.LessonName>{plannedEvent.name}</S.LessonName>
-      <S.LessonNumber>{plannedEvent.lesson}</S.LessonNumber>
+      <S.LessonNumber>{plannedEvent.type}</S.LessonNumber>
     </S.Wrapper>
   );
 };

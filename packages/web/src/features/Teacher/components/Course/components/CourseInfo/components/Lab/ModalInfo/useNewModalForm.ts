@@ -1,9 +1,9 @@
-import { useAppDispatch } from 'packages/web/src/store/hooks';
+import { IHomework } from '@web-journal/libs';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 
 export interface IModalInfoApi {
-  updateHomework: (data: any) => Promise<void>;
+  updateHomework: (homework: IHomework) => Promise<void>;
 }
 
 export const useNewModalForm = (
@@ -12,13 +12,13 @@ export const useNewModalForm = (
   studentId: string,
   getStudents: () => Promise<any>
 ) => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<IHomework>();
   const location = useLocation();
 
-  const submitHomework = async (data: any) => {
+  const submitHomework = async (homework: IHomework) => {
     const pathname = location.pathname.slice(4);
-    const homework = { ...data, studentId, pathname };
-    await modalInfoApi.updateHomework(homework);
+    const newHomework = { ...homework, studentId, pathname };
+    await modalInfoApi.updateHomework(newHomework);
 
     getStudents();
     reset();

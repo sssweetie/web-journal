@@ -5,9 +5,10 @@ import { Course } from '../Course';
 import { PlannedEvent } from '../PlannedEvent';
 import { getCourses } from 'packages/web/src/utils';
 import { httpClient } from '../../../services/httpClient';
+import { IPlannedEvent } from '@web-journal/libs';
 
 interface Props {
-  plannedEvents: any;
+  plannedEvents: IPlannedEvent[];
 }
 
 export const MainContent = ({ plannedEvents }: Props) => {

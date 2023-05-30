@@ -1,16 +1,11 @@
 import React from 'react';
 import * as S from './styled';
 import { List, ListItemButton, ListItemText } from '@mui/material';
-
-interface PersonalInfo {
-  name: string;
-  mail: string;
-  link: string;
-}
+import { Teacher } from '@web-journal/libs';
 
 interface Props {
   settings: Array<string>;
-  personalInfo: PersonalInfo | undefined;
+  personalInfo: Teacher | undefined;
   navigateHandler: (url: string) => void;
 }
 

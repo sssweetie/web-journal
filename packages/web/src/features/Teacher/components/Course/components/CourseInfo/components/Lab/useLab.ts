@@ -37,7 +37,7 @@ export const useLab = (labApi: ILabApi) => {
         );
         return { ...item, ...findItem };
       });
-
+      console.log(students);
       setStudents(students);
     } catch (error) {
       console.error(error);

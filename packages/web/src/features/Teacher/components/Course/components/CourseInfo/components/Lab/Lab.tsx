@@ -13,6 +13,7 @@ import { ModalInfo } from './ModalInfo';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
 import { IHomework, useLab } from './useLab';
 import { labApi } from './labApi';
+import { Button } from '@mui/material';
 
 export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
@@ -24,8 +25,6 @@ export const Lab = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
   };
-
-  const navigate = useNavigate();
 
   const handleClick = (id: string) => {
     setOpen(true);
@@ -76,11 +75,6 @@ export const Lab = () => {
                 }}
               >
                 <TableCell
-                  onClick={() =>
-                    navigate(
-                      '/api/teacher/:teacherId/course/:courseId/lab/:labId/'
-                    )
-                  }
                   component="th"
                   scope="row"
                   sx={{
@@ -93,9 +87,12 @@ export const Lab = () => {
                 <TableCell align="center">{row.mark}</TableCell>
                 <TableCell align="center">{row.checked}</TableCell>
                 <TableCell align="right">
-                  <button onClick={() => handleClick(row._id)}>
-                    check hero
-                  </button>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleClick(row._id)}
+                  >
+                    Проверить
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

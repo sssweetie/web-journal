@@ -14,27 +14,27 @@ import { Courses } from '../features/Teacher/components/Courses';
 export function App() {
   const plannedEvents = [
     {
-      name: 'Заседание кафедры',
+      type: 'Заседание кафедры',
       date: 'ПН 14:00',
-      lesson: '-',
+      name: '-',
       backgroundColor: '#99FF99',
     },
     {
-      name: 'Семинар',
+      type: 'Семинар',
       date: 'ВТ 16:00',
-      lesson: 'Урок 6: XXX ',
+      name: 'Урок 6: XXX ',
       backgroundColor: '#FFFF99',
     },
     {
-      name: 'Лекция',
+      type: 'Лекция',
       date: 'ВТ 10:00',
-      lesson: 'Урок 3: YYY',
+      name: 'Урок 3: YYY',
       backgroundColor: '#FFCCFF',
     },
     {
-      name: 'Лабораторная работа',
+      type: 'Лабораторная работа',
       date: 'ВТ 12:00',
-      lesson: 'Урок 1: ZZZ',
+      name: 'Урок 1: ZZZ',
       backgroundColor: '#CCFFFF',
     },
   ];
