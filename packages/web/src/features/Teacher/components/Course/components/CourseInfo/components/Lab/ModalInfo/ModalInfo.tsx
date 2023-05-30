@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Link from '@mui/material/Link';
@@ -8,25 +8,39 @@ import { useNewModalForm } from './useNewModalForm';
 import { modalInfoApi } from './modalInfoApi';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
 
+interface IHomework {
+  comment: string;
+  id: string;
+  additional: string;
+  mark: number;
+}
+
 interface Props {
   open: boolean;
-  studentId: string;
+  homework: IHomework;
   onClose: () => void;
   getStudents: () => Promise<any>;
 }
 
 export const ModalInfo: React.FC<Props> = ({
   open,
-  studentId,
+  homework,
   onClose,
   getStudents,
 }) => {
-  const { register, handleSubmit } = useNewModalForm(
+  const { register, handleSubmit, setValue } = useNewModalForm(
     modalInfoApi(httpClient),
     onClose,
-    studentId,
+    homework.id,
     getStudents
   );
+
+  useEffect(() => {
+    if (open) {
+      setValue('comment', homework.comment);
+      setValue('mark', homework.mark);
+    }
+  }, [open]);
 
   return (
     <Modal
@@ -43,7 +57,8 @@ export const ModalInfo: React.FC<Props> = ({
           </Link>
         </span>
         <p>
-          <span>Комментарий: </span>Здравствуйте, прислал работу
+          <span>Комментарий: </span>
+          {homework.additional}
         </p>
         <TextField
           {...register('mark', { required: true })}
@@ -52,6 +67,7 @@ export const ModalInfo: React.FC<Props> = ({
           type="number"
           required
         />
+
         <TextField
           {...register('comment', { maxLength: 250 })}
           id="outlined-multiline-flexible"
@@ -59,6 +75,7 @@ export const ModalInfo: React.FC<Props> = ({
           multiline
           maxRows={4}
         />
+
         <Button type="submit" variant="contained">
           Submit
         </Button>

@@ -12,7 +12,7 @@ export const useNewModalForm = (
   studentId: string,
   getStudents: () => Promise<any>
 ) => {
-  const { register, handleSubmit, reset } = useForm<IHomework>();
+  const { register, handleSubmit, reset, setValue } = useForm<IHomework>();
   const location = useLocation();
 
   const submitHomework = async (homework: IHomework) => {
@@ -25,5 +25,5 @@ export const useNewModalForm = (
     onClose();
   };
 
-  return { register, handleSubmit: handleSubmit(submitHomework) };
+  return { register, handleSubmit: handleSubmit(submitHomework), setValue };
 };

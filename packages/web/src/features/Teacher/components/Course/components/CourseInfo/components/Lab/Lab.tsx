@@ -18,7 +18,7 @@ import { Button } from '@mui/material';
 export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
-  const [studentId, setStudentId] = React.useState('');
+  const [homework, setHomework] = React.useState<any>({});
 
   const { students, getStudents } = useLab(labApi(httpClient));
 
@@ -26,9 +26,14 @@ export const Lab = () => {
     setStatus(event.target.value);
   };
 
-  const handleClick = (id: string) => {
+  const handleClick = (row: any) => {
     setOpen(true);
-    setStudentId(id);
+    setHomework({
+      id: row._id,
+      comment: row.comment,
+      additional: row.additional,
+      mark: row.mark,
+    });
   };
 
   const handleClose = () => {
@@ -87,10 +92,7 @@ export const Lab = () => {
                 <TableCell align="center">{row.mark}</TableCell>
                 <TableCell align="center">{row.checked}</TableCell>
                 <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    onClick={() => handleClick(row._id)}
-                  >
+                  <Button variant="contained" onClick={() => handleClick(row)}>
                     Проверить
                   </Button>
                 </TableCell>
@@ -100,7 +102,7 @@ export const Lab = () => {
       </Table>
       <ModalInfo
         open={open}
-        studentId={studentId}
+        homework={homework}
         onClose={handleClose}
         getStudents={getStudents}
       />

@@ -26,6 +26,7 @@ const coursesSchema = new Schema<Courses>({
           date: String,
           mark: Number,
           comment: String,
+          additional: String,
           checked: String,
         },
       ],
