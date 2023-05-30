@@ -1,9 +1,8 @@
-import { ObjectId } from 'mongoose';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 interface ILabApi {
-  getStudents: (query: string) => Promise<any>;
+  getStudents: (query: string, url: string) => Promise<any>;
 }
 
 export interface IHomework {
@@ -24,15 +23,21 @@ export const useLab = (labApi: ILabApi) => {
   const getStudents = async () => {
     try {
       setLoader(true);
-      const res = await labApi.getStudents(location.search);
-      const homework: IHomework[] = location.state.homework;
+
+      const res = await labApi.getStudents(
+        location.search,
+        location.pathname.slice(4)
+      );
+
+      const homework = res.lab.homework;
 
       const students = homework.map((item: IHomework) => {
-        const findItem = res.data.find(
+        const findItem = res.students.find(
           (dataItem: any) => dataItem._id === item._id
         );
         return { ...item, ...findItem };
       });
+
       setStudents(students);
     } catch (error) {
       console.error(error);
@@ -42,8 +47,7 @@ export const useLab = (labApi: ILabApi) => {
   };
 
   useEffect(() => {
-    console.log('Get Students');
     getStudents();
   }, []);
-  return { students };
+  return { students, getStudents };
 };

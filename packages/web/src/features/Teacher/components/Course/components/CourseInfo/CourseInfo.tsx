@@ -16,16 +16,14 @@ export const CourseInfo = () => {
     const studentsId = lab.homework.map((homework: any) => homework._id);
 
     navigate(
-      `${location.pathname}/lab/${lab._id}?students=${studentsId.join(',')}`,
-      {
-        state: {
-          homework: lab.homework,
-        },
-      }
+      `${location.pathname}/lab/${lab._id}?students=${studentsId.join(',')}`
     );
   };
 
-  const { select } = useCourse(courseApi(httpClient));
+  // const select = useAppSelector((state) => state.courses.courseInfo);
+
+  const { courseInfo } = useCourse(courseApi(httpClient));
+
   const location = useLocation();
   return (
     <Table>
@@ -36,7 +34,7 @@ export const CourseInfo = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {select.courseInfo!.labs.map((lab: any) => (
+        {courseInfo.labs?.map((lab: any) => (
           <TableRow
             key={lab.name}
             sx={{

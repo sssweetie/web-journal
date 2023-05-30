@@ -9,4 +9,4 @@ export const router = Router();
 router.use('/login', loginRouter);
 router.use('/teacher', coursesRouter);
 router.use('/teacher', teacherRouter);
-router.use('/teacher/:teacherId/course/:courseId', studentsRouter);
+router.use('/teacher/:teacherId', studentsRouter);

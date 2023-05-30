@@ -12,13 +12,20 @@ interface Props {
   open: boolean;
   studentId: string;
   onClose: () => void;
+  getStudents: () => Promise<any>;
 }
 
-export const ModalInfo: React.FC<Props> = ({ open, studentId, onClose }) => {
+export const ModalInfo: React.FC<Props> = ({
+  open,
+  studentId,
+  onClose,
+  getStudents,
+}) => {
   const { register, handleSubmit } = useNewModalForm(
     modalInfoApi(httpClient),
     onClose,
-    studentId
+    studentId,
+    getStudents
   );
 
   return (

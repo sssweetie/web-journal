@@ -18,7 +18,8 @@ export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
   const [studentId, setStudentId] = React.useState('');
-  const { students } = useLab(labApi(httpClient));
+
+  const { students, getStudents } = useLab(labApi(httpClient));
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
@@ -100,7 +101,12 @@ export const Lab = () => {
             ))}
         </TableBody>
       </Table>
-      <ModalInfo open={open} studentId={studentId} onClose={handleClose} />
+      <ModalInfo
+        open={open}
+        studentId={studentId}
+        onClose={handleClose}
+        getStudents={getStudents}
+      />
     </>
   );
 };
