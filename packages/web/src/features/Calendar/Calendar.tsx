@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import * as S from './styled';
 import { SliderButtons } from '../../components/SliderButtons';
 import { Link, useParams } from 'react-router-dom';
+import { useCalendar } from './useCalendar';
+import { httpClient } from '../services/httpClient';
+import { calendarApi } from './calendarApi';
 
 export const Calendar = () => {
-  
+  const { schedule } = useCalendar(calendarApi(httpClient));
   const params = useParams();
 
   const monthsName = [
@@ -21,7 +24,7 @@ export const Calendar = () => {
     'November',
     'December',
   ];
-  
+
   const daysName = [
     'Monday',
     'Tuesday',

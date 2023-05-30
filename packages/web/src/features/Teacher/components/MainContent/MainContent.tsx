@@ -18,7 +18,7 @@ export const MainContent = ({ plannedEvents }: Props) => {
 
   const loadData = async () => {
     const data = await getCourses(httpClient, params.teacherId);
-    const array = data.courceData.map((course: any, index: number) => ({
+    const array = data.courseData.map((course: any, index: number) => ({
       courseData: course,
       groupData: data.groups[index],
     }));

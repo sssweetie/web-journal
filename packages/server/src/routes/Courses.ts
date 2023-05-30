@@ -12,15 +12,6 @@ coursesRouter.get('/:teacherId/course/:courseId', async (req, res) => {
   }
 });
 
-coursesRouter.get('/:teacherId/main', async (req, res) => {
-  try {
-    const result = await CoursesController.getAllCourses(req.params.teacherId);
-    res.status(200).send(result);
-  } catch {
-    res.status(400);
-  }
-});
-
 coursesRouter.put(
   '/:teacherId/course/:courseId/lab/:labId/:studentId',
   async (req, res) => {
@@ -38,3 +29,13 @@ coursesRouter.put(
     }
   }
 );
+
+coursesRouter.get('/:teacherId/courses', async (req, res) => {
+  try {
+    console.log(req.params);
+    const courses = await CoursesController.getAllCourses(req.params.teacherId);
+    res.status(200).send(courses);
+  } catch {
+    res.status(400);
+  }
+});

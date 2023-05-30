@@ -1,8 +1,6 @@
 // import { IHomework } from '@web-journal/libs';
-import { IHomework } from '@web-journal/libs';
 import { CoursesModel } from '../models/Courses';
 import { GroupsController } from './Groups';
-import mongoose from 'mongoose';
 
 export const CoursesController = {
   getData: async (courseId: string) => {
@@ -11,12 +9,12 @@ export const CoursesController = {
   },
 
   getAllCourses: async (teacherId: string) => {
-    const courceData = await CoursesModel.find({ teacherId });
-    const promises = courceData.map((course: any) =>
+    const courseData = await CoursesModel.find({ teacherId });
+    const promises = courseData.map((course: any) =>
       GroupsController.getGroups(course.groupsId)
     );
     const groups = (await Promise.all(promises)).flat(1);
-    return { courceData, groups };
+    return { courseData, groups };
   },
 
   updateHomework: async (homework: any) => {

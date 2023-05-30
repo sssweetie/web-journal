@@ -1,7 +1,8 @@
 import { AxiosInstance } from 'axios';
 
 export const calendarApi = (httpClient: AxiosInstance) => ({
-  get: async () => {
-    const res = httpClient.get('/teacher/:teacherId/calendar');
+  get: async (id: string) => {
+    const res = await httpClient.get(`/teacher/${id}/calendar`);
+    return res;
   },
 });

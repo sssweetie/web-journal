@@ -12,7 +12,14 @@ export const useTeacher = (teacherApi: TeacherApi) => {
   const getPersonalInfo = async () => {
     try {
       const res = await teacherApi.getPersonalInfo(params.teacherId);
-      setTeacher(res);
+      const teacher = {
+        courseData: res.courseData,
+        groups: res.groups,
+        teacher: res._doc,
+      };
+
+      console.log(res);
+      setTeacher(teacher);
     } catch (err) {
       console.error(err);
     }

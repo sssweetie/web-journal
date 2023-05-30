@@ -1,9 +1,20 @@
+import { Teacher } from '@web-journal/libs';
 import { model, Schema } from 'mongoose';
 
-const teacherSchema = new Schema<any>({
+const teacherSchema = new Schema<Teacher>({
   name: String,
   link: String,
   mail: String,
+  events: [
+    {
+      date_start: Date,
+      date_end: Date,
+      name: String,
+      type: String,
+      repeatWeek: Boolean,
+      repeatTwoWeek: Boolean,
+    },
+  ],
 });
 
-export const TeacherModel = model<any>('teachers', teacherSchema);
+export const TeacherModel = model<Teacher>('teachers', teacherSchema);

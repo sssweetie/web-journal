@@ -10,7 +10,7 @@ export const Teacher = ({ content }: any) => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { getPersonalInfo, teacher } = useTeacher(teacherApi(httpClient));
+  const { teacher } = useTeacher(teacherApi(httpClient));
 
   const settings = ['Main', 'Courses', 'Calendar', 'Settings'];
 

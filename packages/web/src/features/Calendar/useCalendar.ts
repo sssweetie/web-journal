@@ -1,23 +1,18 @@
+import { ISchedule } from '@web-journal/libs';
 import { useEffect, useState } from 'react';
-
-interface Schedule {
-  date_start: string;
-  date_end: string;
-  type: string;
-  name: string;
-  repeatWeek: boolean;
-  repeatTwoWeek: boolean;
-}
+import { useParams } from 'react-router-dom';
 
 export interface ICalendarApi {
-  get: () => Promise<Schedule[]>;
+  get: (id: string) => any;
 }
 
 export const useCalendar = (calendarApi: ICalendarApi) => {
-  const [schedule, setSchedule] = useState<Schedule[]>([]);
+  const params = useParams();
+  console.log(params);
+  const [schedule, setSchedule] = useState<ISchedule[]>([]);
 
   const getSchedule = async () => {
-    const res = await calendarApi.get();
+    const res = await calendarApi.get('qwe');
     setSchedule(res);
   };
 
