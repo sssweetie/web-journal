@@ -4,7 +4,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -17,7 +17,7 @@ import { labApi } from './labApi';
 export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
-
+  const [studentId, setStudentId] = React.useState('');
   const { students } = useLab(labApi(httpClient));
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -26,8 +26,9 @@ export const Lab = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (id: string) => {
     setOpen(true);
+    setStudentId(id);
   };
 
   const handleClose = () => {
@@ -67,6 +68,7 @@ export const Lab = () => {
             )
             .map((row: IHomework) => (
               <TableRow
+                id={row._id}
                 key={row.name}
                 sx={{
                   '&:last-child td, &:last-child th': { border: 0 },
@@ -90,13 +92,15 @@ export const Lab = () => {
                 <TableCell align="center">{row.mark}</TableCell>
                 <TableCell align="center">{row.checked}</TableCell>
                 <TableCell align="right">
-                  <button onClick={handleClick}>check hero</button>
+                  <button onClick={() => handleClick(row._id)}>
+                    check hero
+                  </button>
                 </TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
-      <ModalInfo open={open} onClose={handleClose}></ModalInfo>
+      <ModalInfo open={open} studentId={studentId} onClose={handleClose} />
     </>
   );
 };

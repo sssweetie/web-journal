@@ -13,16 +13,17 @@ export interface IHomework {
   checked: string;
   mark: number;
   comment: string;
-  _id: ObjectId;
+  _id: string;
 }
 
 export const useLab = (labApi: ILabApi) => {
   const [students, setStudents] = useState<any>([]);
-
+  const [loader, setLoader] = useState(false);
   const location = useLocation();
 
   const getStudents = async () => {
     try {
+      setLoader(true);
       const res = await labApi.getStudents(location.search);
       const homework: IHomework[] = location.state.homework;
 
@@ -32,14 +33,16 @@ export const useLab = (labApi: ILabApi) => {
         );
         return { ...item, ...findItem };
       });
-
       setStudents(students);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoader(false);
     }
   };
 
   useEffect(() => {
+    console.log('Get Students');
     getStudents();
   }, []);
   return { students };

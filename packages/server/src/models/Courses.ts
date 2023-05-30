@@ -17,19 +17,16 @@ const coursesSchema = new Schema<Courses>({
     {
       name: String,
       maxMark: Number,
-      passed: [
+      homework: [
         {
-          groupsId: {
-            type: Schema.Types.ObjectId,
-            ref: 'groups',
-          },
           studentsId: {
-            date: String,
-            mark: Number,
-            comment: String,
             type: Schema.Types.ObjectId,
             ref: 'students',
           },
+          date: String,
+          mark: Number,
+          comment: String,
+          checked: String,
         },
       ],
     },

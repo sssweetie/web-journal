@@ -21,7 +21,6 @@ interface Props {
 export const Course = ({ data }: Props) => {
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params);
   return (
     <S.Wrapper>
       <S.Background />

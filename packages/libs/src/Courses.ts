@@ -18,3 +18,12 @@ export interface Courses {
   teacherId: Schema.Types.ObjectId;
   labs: Array<Lab>;
 }
+
+export interface IHomework {
+  studentId: string;
+  comment: string;
+  mark: number;
+  courseId?: string;
+  pathname?: string;
+  labId?: string;
+}

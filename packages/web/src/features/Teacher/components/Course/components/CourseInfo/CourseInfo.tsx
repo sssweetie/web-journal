@@ -25,9 +25,8 @@ export const CourseInfo = () => {
     );
   };
 
-  const { courseInfo } = useCourse(courseApi(httpClient));
+  const { select } = useCourse(courseApi(httpClient));
   const location = useLocation();
-  console.log(courseInfo);
   return (
     <Table>
       <TableHead>
@@ -37,7 +36,7 @@ export const CourseInfo = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {courseInfo.labs?.map((lab: any) => (
+        {select.courseInfo!.labs.map((lab: any) => (
           <TableRow
             key={lab.name}
             sx={{
