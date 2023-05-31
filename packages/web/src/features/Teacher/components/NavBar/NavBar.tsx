@@ -1,7 +1,6 @@
 import React from 'react';
 import * as S from './styled';
 import { List, ListItemButton, ListItemText } from '@mui/material';
-import { Teacher } from '@web-journal/libs';
 
 interface Props {
   settings: Array<string>;

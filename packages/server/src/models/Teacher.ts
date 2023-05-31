@@ -6,6 +6,9 @@ const teacherSchema = new Schema<Teacher>(
     name: String,
     link: String,
     mail: String,
+    firstName: String,
+    lastName: String,
+    surname: String,
     // events: [
     //   {
     //     date_start: Date,

@@ -63,7 +63,7 @@ export const Lab = () => {
             <TableCell align="center">Дата</TableCell>
             <TableCell align="center">Отметка</TableCell>
             <TableCell align="center">Статус проверки</TableCell>
-            <TableCell align="right">Проверить</TableCell>
+            <TableCell align="center">Проверить</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -91,8 +91,8 @@ export const Lab = () => {
                 <TableCell align="center">{row.date}</TableCell>
                 <TableCell align="center">{row.mark}</TableCell>
                 <TableCell align="center">{row.checked}</TableCell>
-                <TableCell align="right">
-                  <Button variant="contained" onClick={() => handleClick(row)}>
+                <TableCell align="center">
+                  <Button variant="outlined" onClick={() => handleClick(row)}>
                     Проверить
                   </Button>
                 </TableCell>

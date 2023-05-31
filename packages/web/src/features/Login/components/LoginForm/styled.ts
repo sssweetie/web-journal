@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Form = styled.form`
   min-width: 22.5rem;
-  min-height: 26.25rem;
+  min-height: 22.25rem;
   display: flex;
   flex-direction: column;
   background: #ffffff;

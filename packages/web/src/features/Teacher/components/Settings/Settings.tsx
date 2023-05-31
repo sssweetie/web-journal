@@ -4,30 +4,39 @@ import { useTeacher } from '../../hooks/useTeacher';
 import { teacherApi } from '../../teacherApi';
 import { httpClient } from '../../../services/httpClient';
 import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 export const Settings = () => {
   const { teacher } = useTeacher(teacherApi(httpClient));
-  const { handleSubmit, register } = useForm({
-    defaultValues: {
-      name: teacher.name,
-      mail: teacher.mail,
-      link: teacher.link,
-      telephone: '',
-      sex: 'M',
-      birthday: '',
-    },
-  });
+  const { handleSubmit, register, setValue } = useForm();
 
   const onSubmit = (data: any) => {
+    console.log('123');
   };
+
+  // useEffect(() => {
+  //   setValue('firstName', teacher.teacher?.firstName);
+  //   setValue('lastName', teacher.teacher?.lastName);
+  //   setValue('surname', teacher.teacher?.surname);
+  //   setValue('link', teacher.teacher?.link);
+  //   setValue('mail', teacher.teacher?.mail);
+  // }, []);
 
   return (
     <>
       <h3>Настройки</h3>
       <S.FormWrapper onSubmit={handleSubmit(onSubmit)}>
         <FormControl variant="standard" disabled>
-          <InputLabel htmlFor="name">Ваше ФИО</InputLabel>
-          <Input {...register('name')} id="name" />
+          <InputLabel htmlFor="firstName">Имя</InputLabel>
+          <Input {...register('firstName')} id="firstName" />
+        </FormControl>
+        <FormControl variant="standard" disabled>
+          <InputLabel htmlFor="lastName">Фамилия</InputLabel>
+          <Input {...register('lastName')} id="lastName" />
+        </FormControl>
+        <FormControl variant="standard" disabled>
+          <InputLabel htmlFor="surname">Отчество</InputLabel>
+          <Input {...register('surname')} id="surname" />
         </FormControl>
         <FormControl variant="standard" disabled>
           <InputLabel htmlFor="sex">Пол</InputLabel>
@@ -45,12 +54,14 @@ export const Settings = () => {
           <InputLabel htmlFor="mail">Почта</InputLabel>
           <Input {...register('mail')} id="mail" />
         </FormControl>
-        <Button variant="contained">Save</Button>
         <FormControl variant="standard" disabled>
           <InputLabel htmlFor="link">Ссылка</InputLabel>
           <Input {...register('link')} id="link" />
         </FormControl>
       </S.FormWrapper>
+      <Button style={{ width: '270px', marginTop: '20px' }} variant="contained">
+        Save
+      </Button>
     </>
   );
 };

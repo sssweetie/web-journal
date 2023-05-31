@@ -19,7 +19,7 @@ export const MainContent = ({ plannedEvents }: Props) => {
   return (
     <>
       <Link to={`/api/teacher/${params.teacherId}/courses`}>
-        <S.Title>My Courses</S.Title>
+        <S.Title>Мои курсы</S.Title>
       </Link>
       <S.CoursesSection>
         {courses.map(
@@ -28,7 +28,7 @@ export const MainContent = ({ plannedEvents }: Props) => {
         )}
       </S.CoursesSection>
       <Link to={`/api/teacher/${params.teacherId}/calendar`}>
-        <S.Title style={{ marginTop: '60px' }}>Event</S.Title>
+        <S.Title style={{ marginTop: '60px' }}>Ближайшие события</S.Title>
       </Link>
       <S.Events>
         {plannedEvents.map(
