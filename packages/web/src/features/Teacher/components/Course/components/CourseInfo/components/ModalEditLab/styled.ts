@@ -28,3 +28,8 @@ export const DownloadArea = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

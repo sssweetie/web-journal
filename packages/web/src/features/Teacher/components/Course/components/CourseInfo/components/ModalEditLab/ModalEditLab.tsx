@@ -4,6 +4,7 @@ import * as S from './styled';
 import { Button, IconButton, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Docx } from './components/Docx';
 
 interface Props {
   isOpen: boolean;
@@ -42,10 +43,11 @@ export const ModalEditLab = ({ isOpen, onClose }: Props) => {
           </IconButton>
         </div>
         <S.DownloadArea>Загрузить файлы</S.DownloadArea>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button variant="outlined">Распечатать ведомость</Button>
-          <Button variant="outlined">Получить статистику</Button>
-        </div>
+        <S.ButtonWrapper>
+          <Button style={{ width: '100%' }} variant="outlined" onClick={Docx}>
+            Распечатать ведомость
+          </Button>
+        </S.ButtonWrapper>
 
         <Button variant="contained">Подтвердить</Button>
       </S.Wrapper>
