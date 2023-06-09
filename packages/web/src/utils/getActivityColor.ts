@@ -24,5 +24,5 @@ export const getActivityColor = (type: string) => {
       break;
   }
 
-  return { borderColor, backgroundColor };
+  return [borderColor, backgroundColor];
 };

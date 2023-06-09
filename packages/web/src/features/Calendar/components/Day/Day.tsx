@@ -1,10 +1,9 @@
 import React from 'react';
 import * as S from './styled';
 import { Activity } from '../Activity';
-import { IActivity } from '../Activity/Activity';
-
+import { sortByTime } from 'packages/web/src/utils';
 interface Props {
-  activities?: IActivity[];
+  activities?: Activity[];
   children: number | string;
   today?: boolean;
 }
@@ -15,7 +14,7 @@ export const Day = ({ activities, children, today }: Props) => {
       <S.DayNumber>{children}</S.DayNumber>
       <S.ActivitiesWrapper>
         {activities &&
-          activities.map((activity: IActivity, index: number) => {
+          sortByTime(activities).map((activity: Activity, index: number) => {
             return index < 6 ? <Activity activity={activity} /> : null;
           })}
       </S.ActivitiesWrapper>
