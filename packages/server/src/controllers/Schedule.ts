@@ -8,7 +8,7 @@ export const ScheduleController = {
     return result === null ? false : true;
   },
   getSchedule: async (id: string) => {
-    const res = await ScheduleModel.findById(id);
+    const res = await ScheduleModel.find({ teacherId: id });
     return res;
   },
 };

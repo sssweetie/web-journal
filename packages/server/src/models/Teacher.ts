@@ -9,16 +9,6 @@ const teacherSchema = new Schema<Teacher>(
     firstName: String,
     lastName: String,
     surname: String,
-    // events: [
-    //   {
-    //     date_start: Date,
-    //     date_end: Date,
-    //     name: String,
-    //     type: String,
-    //     repeatWeek: Boolean,
-    //     repeatTwoWeeks: Boolean,
-    //   },
-    // ],
   },
   { collection: 'teachers' }
 );

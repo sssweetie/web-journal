@@ -1,4 +1,4 @@
-import { ISchedule } from '@web-journal/libs';
+import { generateActivities } from 'packages/web/src/utils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,20 +9,21 @@ export interface ICalendarApi {
 export const useCalendar = (calendarApi: ICalendarApi) => {
   const params = useParams();
 
-  const [schedule, setSchedule] = useState<ISchedule[]>([]);
+  const [activities, setActivities] = useState<any>([]);
 
-  const getSchedule = async () => {
+  const getActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);
-      setSchedule(res.events);
+      const activities = generateActivities(res);
+      setActivities(activities);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getSchedule();
+    getActivities();
   }, []);
 
-  return { schedule };
+  return { activities };
 };

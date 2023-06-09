@@ -15,10 +15,8 @@ const scheduleSchema = new Schema<Schedule>(
     lessonType: String,
     cab: String,
     startTime: String,
-    schedule: {
-      type: String,
-      day: [Number],
-    },
+    startDate: String,
+    scheduleType: String,
   },
   { collection: 'schedule' }
 );

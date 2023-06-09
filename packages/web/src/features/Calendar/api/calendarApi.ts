@@ -7,3 +7,4 @@ export const calendarApi = (httpClient: AxiosInstance): ICalendarApi => ({
     return res.data;
   },
 });
+

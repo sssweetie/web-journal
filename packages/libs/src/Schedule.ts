@@ -1,10 +1,5 @@
 import { ObjectId } from 'mongoose';
 
-export interface ScheduleExtra {
-  type: string;
-  day: number[];
-}
-
 export interface Schedule {
   name: string;
   _id: ObjectId;
@@ -13,5 +8,6 @@ export interface Schedule {
   lessonType: string;
   cab: string;
   startTime: string;
-  schedule: ScheduleExtra;
+  scheduleType: string;
+  startDate: string;
 }

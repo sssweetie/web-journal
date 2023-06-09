@@ -14,12 +14,3 @@ teacherRouter.get('/:teacherId/main', async (req, res) => {
     res.status(400);
   }
 });
-
-teacherRouter.get('/:teacherId/calendar', async (req, res) => {
-  try {
-    const teacher = await TeacherController.getData(req.params.teacherId);
-    res.status(200).send(teacher);
-  } catch {
-    res.status(400);
-  }
-});

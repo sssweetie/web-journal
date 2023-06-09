@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import * as S from './styled';
-
 import { Day } from './components/Day';
+import { useCalendar } from './hooks/useCalendar';
+import { calendarApi } from './api/calendarApi';
+import { httpClient } from '../services/httpClient';
+
 export const Calendar = () => {
+  const { activities } = useCalendar(calendarApi(httpClient));
+
   const [currentDate, setCurrentDate] = useState(moment());
 
   const weekdaysShort = moment.weekdaysShort();
@@ -26,8 +31,13 @@ export const Calendar = () => {
     const days = [];
     for (let i = 1; i <= daysInMonth(); i++) {
       const isCurrentDay = i === currentDate.date();
+
+      const dayActivities: any = activities.filter((activity: any) =>
+        moment(activity.date).isSame(moment(currentDate).date(i), 'day')
+      );
+
       days.push(
-        <Day today={isCurrentDay} key={`day-${i}`}>
+        <Day today={isCurrentDay} key={`day-${i}`} activities={dayActivities}>
           {i}
         </Day>
       );
@@ -60,73 +70,3 @@ export const Calendar = () => {
     </S.Calendar>
   );
 };
-
-// const activities: IActivity[] = [
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 03:24:00'),
-//     name: 'Лабораторная работа 1',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '302a',
-//     date: new Date('December 17, 1995 04:24:00'),
-//     name: 'Лабораторная работа 2',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 05:24:00'),
-//     name: 'Лабораторная работа 3',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 03:24:00'),
-//     name: 'Лабораторная работа 1',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '302a',
-//     date: new Date('December 17, 1995 04:24:00'),
-//     name: 'Лабораторная работа 2',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 05:24:00'),
-//     name: 'Лабораторная работа 3',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 03:24:00'),
-//     name: 'Лабораторная работа 1',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '302a',
-//     date: new Date('December 17, 1995 04:24:00'),
-//     name: 'Лабораторная работа 2',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-//   {
-//     cab: '301a',
-//     date: new Date('December 17, 1995 05:24:00'),
-//     name: 'Лабораторная работа 3',
-//     backgroundColor: '#C5FFD2',
-//     type: 'Лабораторная работа',
-//   },
-// ];
-
-// export const Calendar = () => {
-//   return <Day activities={activities} />;
-// };
