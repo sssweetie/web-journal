@@ -10,3 +10,4 @@ router.use('/login', loginRouter);
 router.use('/teacher', coursesRouter);
 router.use('/teacher', teacherRouter);
 router.use('/teacher/:teacherId', studentsRouter);
+router.use('/teacher')
