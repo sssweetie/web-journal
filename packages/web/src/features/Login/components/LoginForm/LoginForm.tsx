@@ -1,12 +1,12 @@
 import React, { FormEvent } from 'react';
 import * as S from './styled';
-import { TextField } from '../TextField';
 import PasswordIcon from '@mui/icons-material/Password';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { loginApi } from '../../loginApi';
 import { httpClient } from '../../../services/httpClient';
 import { useFormLogin } from './hooks/useLoginForm';
 import { User } from '@web-journal/libs';
+import { TextFieldControl } from 'packages/web/src/components/TextFieldControl';
 
 export interface Action {
   login: (data: User) => Promise<void>;
@@ -18,25 +18,25 @@ interface Props {
 }
 
 export const LoginForm = ({ action }: Props) => {
-  const { control, handleSubmit } = useFormLogin(action);
+  const { register, handleSubmit } = useFormLogin(action);
 
   return (
     <S.Form onSubmit={handleSubmit}>
       <S.FormTitle>Log in</S.FormTitle>
-      <TextField
-        control={control}
-        icon={<AccountCircle />}
+      <TextFieldControl
+        register={register}
         attachment="login"
+        icon={<AccountCircle />}
       >
-        User
-      </TextField>
-      <TextField
-        control={control}
-        icon={<PasswordIcon />}
+        Логин
+      </TextFieldControl>
+      <TextFieldControl
+        register={register}
         attachment="password"
+        icon={<PasswordIcon />}
       >
-        Password
-      </TextField>
+        Пароль
+      </TextFieldControl>
       <S.LoginButton>Log in</S.LoginButton>
     </S.Form>
   );
