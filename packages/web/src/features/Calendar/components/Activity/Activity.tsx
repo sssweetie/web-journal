@@ -7,6 +7,8 @@ export interface Activity {
   startTime: string;
   name: string;
   type: string;
+  date?: string;
+  excludeDate: string[];
 }
 
 interface Props {

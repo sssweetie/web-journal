@@ -3,19 +3,19 @@ export const getActivityColor = (type: string) => {
   let borderColor = '';
 
   switch (type) {
-    case 'lab':
+    case 'лаб':
       backgroundColor = '#96C6FF';
       borderColor = '#0075FF';
       break;
-    case 'seminar':
+    case 'сем':
       backgroundColor = '#FFF1DB';
       borderColor = '#FEAE3A';
       break;
-    case 'lection':
+    case 'лек':
       backgroundColor = '#FCDCEF';
       borderColor = '#FE71C6';
       break;
-    case 'extra':
+    case 'доп':
       backgroundColor = '#C5FFD2';
       borderColor = '#01BC11';
       break;

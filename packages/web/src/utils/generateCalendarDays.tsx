@@ -25,8 +25,10 @@ export const generateCalendarDays = (
   for (let i = 1; i <= daysInMonth(); i++) {
     const isCurrentDay = i === currentDate.date();
 
-    const dayActivities: any = activities.filter((activity: any) =>
-      moment(activity.date).isSame(moment(currentDate).date(i), 'day')
+    const dayActivities: Activity[] = activities.filter(
+      (activity: Activity) =>
+        moment(activity.date).isSame(moment(currentDate).date(i), 'day') &&
+        !activity.excludeDate.includes(moment(currentDate).format('YYYY-MM-DD'))
     );
 
     days.push(

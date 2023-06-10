@@ -10,4 +10,5 @@ export interface Schedule {
   startTime: string;
   scheduleType: string;
   startDate: string;
+  excludeDate: string[];
 }

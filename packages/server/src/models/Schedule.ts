@@ -17,6 +17,7 @@ const scheduleSchema = new Schema<Schedule>(
     startTime: String,
     startDate: String,
     scheduleType: String,
+    excludeDate: [String],
   },
   { collection: 'schedule' }
 );

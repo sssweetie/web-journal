@@ -1,8 +1,9 @@
 import { Schedule } from '@web-journal/libs';
 import moment from 'moment';
+import { Activity } from '../features/Calendar/components/Activity';
 
 export const generateActivities = (lessons: Schedule[]) => {
-  const activities: any = [];
+  const activities: Activity[] = [];
 
   lessons.forEach((lesson: Schedule) => {
     const currentDate = moment(lesson.startDate);
@@ -15,6 +16,7 @@ export const generateActivities = (lessons: Schedule[]) => {
           name: lesson.name,
           type: lesson.lessonType,
           cab: lesson.cab,
+          excludeDate: lesson.excludeDate,
         });
         currentDate.add(1, 'week');
       }
@@ -26,6 +28,7 @@ export const generateActivities = (lessons: Schedule[]) => {
           name: lesson.name,
           type: lesson.lessonType,
           cab: lesson.cab,
+          excludeDate: lesson.excludeDate,
         });
         currentDate.add(2, 'week');
       }
