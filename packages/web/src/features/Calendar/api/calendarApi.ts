@@ -9,14 +9,12 @@ export const calendarApi = (httpClient: AxiosInstance): ICalendarApi => ({
   },
   post: async (
     teacherId: string | undefined,
-    excludeDate: string,
-    newActivity: Schedule,
-    activityId: string
+    oldActivity: { id: string; currentDate: string },
+    newActivity: Schedule
   ) => {
     await httpClient.post(`/teacher/${teacherId}/calendar`, {
-      excludeDate,
+      oldActivity,
       newActivity,
-      activityId,
     });
   },
 });

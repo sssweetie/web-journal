@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
 import * as S from './styled';
 import { getActivityColor } from 'packages/web/src/utils';
-import { Modal } from '@mui/material';
 import { ModalEditActivity } from './components/ModalEditActivity';
-
-export interface Activity {
-  cab: string;
-  startTime: string;
-  name: string;
-  type: string;
-  date?: string;
-  excludeDate: string[];
-}
+import { Schedule } from '@web-journal/libs';
 
 interface Props {
-  activity: Activity;
+  activity: Schedule;
+  rescheduleActivity: (
+    newActivity: Schedule,
+    oldActivity: { id: string; currentDate: string }
+  ) => Promise<void>;
 }
 
-export const Activity = ({ activity }: Props) => {
-  const [borderColor, backgroundColor] = getActivityColor(activity.type);
+export const Activity = ({ activity, rescheduleActivity }: Props) => {
+  const [borderColor, backgroundColor] = getActivityColor(activity.lessonType);
   const [isOpen, setOpen] = useState(false);
 
   const onClose = () => {
@@ -36,9 +31,14 @@ export const Activity = ({ activity }: Props) => {
         $backgroundColor={backgroundColor}
         onClick={onClick}
       >
-        {activity.startTime} - {activity.cab} - {activity.type}
+        {activity.startTime} - {activity.cab} - {activity.lessonType}
       </S.Wrapper>
-      <ModalEditActivity open={isOpen} onClose={onClose} activity={activity} />
+      <ModalEditActivity
+        open={isOpen}
+        onClose={onClose}
+        activity={activity}
+        rescheduleActivity={rescheduleActivity}
+      />
     </>
   );
 };

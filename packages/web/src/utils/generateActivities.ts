@@ -1,39 +1,61 @@
 import { Schedule } from '@web-journal/libs';
 import moment from 'moment';
-import { Activity } from '../features/Calendar/components/Activity';
 
 export const generateActivities = (lessons: Schedule[]) => {
-  const activities: Activity[] = [];
+  const activities: Schedule[] = [];
 
   lessons.forEach((lesson: Schedule) => {
     const currentDate = moment(lesson.startDate);
 
     if (lesson.scheduleType === 'weekly') {
-      while (currentDate.isSameOrBefore(moment(), 'day')) {
+      while (currentDate.isSameOrBefore(moment(lesson.endDate))) {
         activities.push({
-          date: currentDate.format('YYYY-MM-DD'),
+          _id: lesson._id,
+          groupId: lesson.groupId,
+          teacherId: lesson.teacherId,
+          startDate: currentDate.format('YYYY-MM-DD'),
           startTime: lesson.startTime,
           name: lesson.name,
-          type: lesson.lessonType,
+          lessonType: lesson.lessonType,
           cab: lesson.cab,
           excludeDate: lesson.excludeDate,
+          scheduleType: lesson.scheduleType,
+          endDate: lesson.endDate,
         });
         currentDate.add(1, 'week');
       }
     } else if (lesson.scheduleType === 'twoWeekly') {
-      while (currentDate.isSameOrBefore(moment(), 'day')) {
+      while (currentDate.isSameOrBefore(moment(lesson.endDate))) {
         activities.push({
-          date: currentDate.format('YYYY-MM-DD'),
+          _id: lesson._id,
+          groupId: lesson.groupId,
+          teacherId: lesson.teacherId,
+          startDate: currentDate.format('YYYY-MM-DD'),
           startTime: lesson.startTime,
           name: lesson.name,
-          type: lesson.lessonType,
+          lessonType: lesson.lessonType,
           cab: lesson.cab,
           excludeDate: lesson.excludeDate,
+          scheduleType: lesson.scheduleType,
+          endDate: lesson.endDate,
         });
         currentDate.add(2, 'week');
       }
+    } else if (lesson.scheduleType === 'special') {
+      activities.push({
+        _id: lesson._id,
+        groupId: lesson.groupId,
+        teacherId: lesson.teacherId,
+        startDate: currentDate.format('YYYY-MM-DD'),
+        startTime: lesson.startTime,
+        name: lesson.name,
+        lessonType: lesson.lessonType,
+        cab: lesson.cab,
+        excludeDate: lesson.excludeDate,
+        scheduleType: lesson.scheduleType,
+        endDate: lesson.endDate,
+      });
     }
   });
-  console.log(activities);
   return activities;
 };

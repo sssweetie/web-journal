@@ -14,11 +14,13 @@ scheduleRouter.get('/:teacherId/calendar', async (req, res) => {
 
 scheduleRouter.post('/:teacherId/calendar', async (req, res) => {
   try {
-    const result = await ScheduleController.rescheduleActivity(
-      req.body.activityId,
-      req.body.excludeDate,
+    await ScheduleController.rescheduleActivity(
+      req.body.oldActivity.id,
+      req.body.oldActivity.currentDate,
       req.body.newActivity
     );
+
+    res.sendStatus(200);
   } catch {
     res.sendStatus(422);
   }

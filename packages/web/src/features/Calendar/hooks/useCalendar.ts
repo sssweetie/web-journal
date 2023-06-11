@@ -7,9 +7,8 @@ export interface ICalendarApi {
   get: (teacherId: string | undefined) => Promise<any>;
   post: (
     teacherId: string | undefined,
-    excludeDate: string,
-    newActivity: Schedule,
-    activityId: string
+    oldActivity: { id: string; currentDate: string },
+    newActivity: Schedule
   ) => Promise<void>;
 }
 
@@ -28,11 +27,16 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
     }
   };
 
-  const rescheduleActivity = async (newActivity: Schedule) => {
+  const rescheduleActivity = async (
+    newActivity: Schedule,
+    oldActivity: { id: string; currentDate: string }
+  ) => {
     try {
-      await calendarApi.post(params.teacherId, '', newActivity, '');
+      await calendarApi.post(params.teacherId, oldActivity, newActivity);
     } catch (error) {
       console.error(error);
+    } finally {
+      getActivities();
     }
   };
 

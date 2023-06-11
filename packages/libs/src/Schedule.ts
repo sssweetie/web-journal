@@ -10,5 +10,6 @@ export interface Schedule {
   startTime: string;
   scheduleType: string;
   startDate: string;
+  endDate: string;
   excludeDate: string[];
 }

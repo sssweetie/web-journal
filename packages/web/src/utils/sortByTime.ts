@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { Activity } from '../features/Calendar/components/Activity';
+import { Schedule } from '@web-journal/libs';
 
-export const sortByTime = (activities: Activity[]) => {
+export const sortByTime = (activities: Schedule[]) => {
   const activity = activities.sort((a, b) => {
     const timeA = moment(a.startTime, 'HH:mm');
     const timeB = moment(b.startTime, 'HH:mm');

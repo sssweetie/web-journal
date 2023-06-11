@@ -7,7 +7,9 @@ import { httpClient } from '../services/httpClient';
 import { generateCalendarDays } from '../../utils';
 
 export const Calendar = () => {
-  const { activities } = useCalendar(calendarApi(httpClient));
+  const { activities, rescheduleActivity } = useCalendar(
+    calendarApi(httpClient)
+  );
 
   const [currentDate, setCurrentDate] = useState(moment());
 
@@ -34,7 +36,7 @@ export const Calendar = () => {
         ))}
       </S.WeekDays>
       <S.CalendarBody>
-        {generateCalendarDays(currentDate, activities)}
+        {generateCalendarDays(currentDate, activities, rescheduleActivity)}
       </S.CalendarBody>
     </S.Calendar>
   );

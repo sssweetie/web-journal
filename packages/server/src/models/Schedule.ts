@@ -16,6 +16,7 @@ const scheduleSchema = new Schema<Schedule>(
     cab: String,
     startTime: String,
     startDate: String,
+    endDate: String,
     scheduleType: String,
     excludeDate: [String],
   },

@@ -1,5 +1,6 @@
 import { Schedule } from '@web-journal/libs';
 import { ScheduleModel } from '../models/Schedule';
+import mongoose from 'mongoose';
 
 export const ScheduleController = {
   getSchedule: async (id: string) => {
@@ -11,7 +12,11 @@ export const ScheduleController = {
     excludeDate: string,
     newActivity: Schedule
   ) => {
-    await ScheduleModel.findOneAndUpdate({ id }, { $push: { excludeDate } });
+    const objectId = new mongoose.Types.ObjectId(id);
+    await ScheduleModel.findByIdAndUpdate(objectId, {
+      $push: { excludeDate },
+    });
+    
     await ScheduleModel.insertMany([
       {
         teacherId: newActivity.teacherId,
@@ -23,6 +28,7 @@ export const ScheduleController = {
         startDate: newActivity.startDate,
         scheduleType: newActivity.scheduleType,
         excludeDate: newActivity.excludeDate,
+        endDate: newActivity.endDate,
       },
     ]);
   },

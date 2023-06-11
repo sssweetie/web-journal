@@ -6,33 +6,55 @@ import { Controller, useForm } from 'react-hook-form';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import moment from 'moment';
-import { Activity } from '../../Activity';
 import {
   DatePicker,
   LocalizationProvider,
   TimeClock,
 } from '@mui/x-date-pickers';
+import { Schedule } from '@web-journal/libs';
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  activity: Activity;
+  activity: Schedule;
+  rescheduleActivity: (
+    newActivity: Schedule,
+    oldActivity: { id: string; currentDate: string }
+  ) => Promise<void>;
 }
 
-export const ModalEditActivity = ({ open, onClose, activity }: Props) => {
+export const ModalEditActivity = ({
+  open,
+  onClose,
+  activity,
+  rescheduleActivity,
+}: Props) => {
   const [time, setTime] = useState<any>(moment());
 
   const { control, handleSubmit } = useForm();
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const newActivity = {
+      ...activity,
+      cab: data.cab,
+      startDate: data.date.format('MM.DD.YYYY'),
+      startTime: data.time.format('HH:mm'),
+      scheduleType: 'special',
+    };
+
+    await rescheduleActivity(newActivity, {
+      id: String(activity._id),
+      currentDate: activity.startDate,
+    });
+
     onClose();
   };
 
   return (
     <Modal open={open} onClose={onClose}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-        <S.Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <S.Wrapper onSubmit={handleSubmit(onSubmit)}>
+        <LocalizationProvider dateAdapter={AdapterMoment}>
           <label>{activity.name}</label>
-          <label>{activity.type}</label>
+          <label>{activity.lessonType}</label>
           <Controller
             control={control}
             name="cab"
@@ -82,8 +104,8 @@ export const ModalEditActivity = ({ open, onClose, activity }: Props) => {
             )}
           />
           <button type="submit">Submit</button>
-        </S.Wrapper>
-      </LocalizationProvider>
+        </LocalizationProvider>
+      </S.Wrapper>
     </Modal>
   );
 };
