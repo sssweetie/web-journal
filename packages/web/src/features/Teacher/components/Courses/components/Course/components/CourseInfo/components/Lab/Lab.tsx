@@ -9,17 +9,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
-import { httpClient } from 'packages/web/src/features/services/httpClient';
-import { IHomework, useLab } from './hooks/useLab';
-import { labApi } from './api/labApi';
 import { Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
   const [homework, setHomework] = React.useState<any>({});
-
-  const { students, getStudents } = useLab(labApi(httpClient));
+  const { state } = useLocation();
+  const { students, getStudents } = state;
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
@@ -67,10 +65,8 @@ export const Lab = () => {
         </TableHead>
         <TableBody>
           {students
-            .filter(
-              (row: IHomework) => row.checked === status || status === 'Все'
-            )
-            .map((row: IHomework) => (
+            .filter((row: any) => row.checked === status || status === 'Все')
+            .map((row: any) => (
               <TableRow
                 id={row._id}
                 key={row.name}

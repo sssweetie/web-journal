@@ -32,7 +32,7 @@ const th: any = tableHeader.map(
     })
 );
 
-export const Docx = () => {
+export const Docx = (statement: any) => {
   const table = new Table({
     rows: [
       new TableRow({
