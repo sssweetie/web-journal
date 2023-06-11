@@ -28,7 +28,9 @@ export const generateCalendarDays = (
     const dayActivities: Activity[] = activities.filter(
       (activity: Activity) =>
         moment(activity.date).isSame(moment(currentDate).date(i), 'day') &&
-        !activity.excludeDate.includes(moment(currentDate).format('YYYY-MM-DD'))
+        !activity.excludeDate.includes(
+          moment(activity.date).format('YYYY-MM-DD')
+        )
     );
 
     days.push(
