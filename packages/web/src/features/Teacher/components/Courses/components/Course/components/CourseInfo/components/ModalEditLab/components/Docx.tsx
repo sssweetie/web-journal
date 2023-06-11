@@ -1,3 +1,4 @@
+import { Student } from '@web-journal/libs';
 import {
   Document,
   Packer,
@@ -33,29 +34,58 @@ const th: any = tableHeader.map(
     })
 );
 
-export const Docx = (statement: any) => {
-  console.log(statement);
+export const Docx = (statement: Student[]) => {
   const tbody = statement.map(
     (student: any, index: number) =>
       new TableRow({
         children: [
           new TableCell({
-            children: [new Paragraph({ text: String(index) })],
+            children: [
+              new Paragraph({
+                text: String(index),
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
-            children: [new Paragraph({ text: student.name })],
+            children: [
+              new Paragraph({
+                text: student.name,
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
-            children: [new Paragraph('')],
+            children: [
+              new Paragraph({
+                text: String(student.studentBook),
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
-            children: [new Paragraph({ text: String(student.mark) })],
+            children: [
+              new Paragraph({
+                text: String(student.mark),
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
-            children: [new Paragraph({ text: String(student.mark / 0.6) })],
+            children: [
+              new Paragraph({
+                text: String(student.mark / 0.6),
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
-            children: [new Paragraph(numberMarkToString(student.mark))],
+            children: [
+              new Paragraph({
+                text: numberMarkToString(student.mark),
+                alignment: AlignmentType.CENTER,
+              }),
+            ],
           }),
           new TableCell({
             children: [new Paragraph('')],

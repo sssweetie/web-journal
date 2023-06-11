@@ -1,5 +1,5 @@
 import { Student } from './Students';
-import { IHomework } from './Courses';
+import { Homework } from './Courses';
 
 export interface Teacher extends Student {
   link: string;
@@ -7,5 +7,5 @@ export interface Teacher extends Student {
 
 export interface ILab {
   students: Student[];
-  homework: IHomework[];
+  homework: Homework[];
 }

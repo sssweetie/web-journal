@@ -1,4 +1,4 @@
-import { Student } from '@web-journal/libs';
+import { Homework, Student } from '@web-journal/libs';
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
@@ -39,7 +39,9 @@ export const useCourse = (courseApi: CourseApi) => {
     if (courseInfo) {
       const studentsGeneral: any[] = [];
       for (const lab of courseInfo.labs) {
-        let arrayToString = lab.homework.map((homework: any) => homework._id);
+        let arrayToString = lab.homework.map(
+          (homework: Homework) => homework._id
+        );
         arrayToString = arrayToString.join(',');
 
         const res = await courseApi.getStudents(
@@ -50,11 +52,11 @@ export const useCourse = (courseApi: CourseApi) => {
 
         const homework = res.lab.homework;
 
-        const students = homework.map((item: any) => {
+        const students = homework.map((hw: Homework) => {
           const student = res.students.find(
-            (dataItem: any) => dataItem._id === item._id
+            (dataItem: any) => dataItem._id === hw._id
           );
-          return { ...student, mark: item.mark };
+          return { ...student, mark: hw.mark };
         });
         studentsGeneral.push(students);
       }
@@ -62,8 +64,9 @@ export const useCourse = (courseApi: CourseApi) => {
       const mergedArray = studentsGeneral.reduce((result, currentArray) => {
         currentArray.forEach((studentToFind: any) => {
           const existingStudent = result.find(
-            (student: any) => student._id === studentToFind._id
+            (student: Student) => student._id === studentToFind._id
           );
+
           if (existingStudent) {
             console.log('exist');
             existingStudent.mark += studentToFind.mark; // Суммируем поле mark
@@ -74,7 +77,7 @@ export const useCourse = (courseApi: CourseApi) => {
         });
         return result;
       }, []);
-
+      console.log(mergedArray);
       setStatement(mergedArray);
     }
   };

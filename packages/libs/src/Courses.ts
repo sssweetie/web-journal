@@ -19,7 +19,8 @@ export interface Courses {
   labs: Array<Lab>;
 }
 
-export interface IHomework {
+export interface Homework {
+  _id: string;
   studentId: string;
   comment: string;
   mark: number;
