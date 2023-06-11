@@ -10,6 +10,7 @@ import {
   UnderlineType,
 } from 'docx';
 import { saveAs } from 'file-saver';
+import { numberMarkToString } from 'packages/web/src/utils';
 // Documents contain sections, you can have multiple sections per document, go here to learn more about sections
 // This simple example will only contain one section
 
@@ -54,7 +55,7 @@ export const Docx = (statement: any) => {
             children: [new Paragraph({ text: String(student.mark / 0.6) })],
           }),
           new TableCell({
-            children: [new Paragraph('')],
+            children: [new Paragraph(numberMarkToString(student.mark))],
           }),
           new TableCell({
             children: [new Paragraph('')],
