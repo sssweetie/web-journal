@@ -33,11 +33,44 @@ const th: any = tableHeader.map(
 );
 
 export const Docx = (statement: any) => {
+  console.log(statement);
+  const tbody = statement.map(
+    (student: any, index: number) =>
+      new TableRow({
+        children: [
+          new TableCell({
+            children: [new Paragraph({ text: String(index) })],
+          }),
+          new TableCell({
+            children: [new Paragraph({ text: student.name })],
+          }),
+          new TableCell({
+            children: [new Paragraph('')],
+          }),
+          new TableCell({
+            children: [new Paragraph({ text: String(student.mark) })],
+          }),
+          new TableCell({
+            children: [new Paragraph({ text: String(student.mark / 0.6) })],
+          }),
+          new TableCell({
+            children: [new Paragraph('')],
+          }),
+          new TableCell({
+            children: [new Paragraph('')],
+          }),
+        ],
+      })
+  );
+
+  console.log(tbody);
+
   const table = new Table({
     rows: [
       new TableRow({
         children: th,
       }),
+      ...tbody,
     ],
   });
   const doc = new Document({
