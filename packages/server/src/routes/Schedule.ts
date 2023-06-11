@@ -11,3 +11,15 @@ scheduleRouter.get('/:teacherId/calendar', async (req, res) => {
     res.sendStatus(422);
   }
 });
+
+scheduleRouter.post('/:teacherId/calendar', async (req, res) => {
+  try {
+    const result = await ScheduleController.rescheduleActivity(
+      req.body.activityId,
+      req.body.excludeDate,
+      req.body.newActivity
+    );
+  } catch {
+    res.sendStatus(422);
+  }
+});

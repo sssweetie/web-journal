@@ -4,14 +4,14 @@ import TextField from '@mui/material/TextField';
 import * as S from './styled';
 import { Controller, useForm } from 'react-hook-form';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import moment from 'moment';
+import { Activity } from '../../Activity';
 import {
   DatePicker,
   LocalizationProvider,
   TimeClock,
 } from '@mui/x-date-pickers';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import moment, { Moment } from 'moment';
-import { Activity } from '../../Activity';
 
 interface Props {
   open: boolean;
