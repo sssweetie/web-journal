@@ -1,7 +1,7 @@
 import { Course } from '../Course/Course';
 import { CoursesSection } from '../MainContent/styled';
-import { useCourses } from './useCourses';
-import { coursesApi } from './coursesApi';
+import { useCourses } from './hooks/useCourses';
+import { coursesApi } from './api/coursesApi';
 import { httpClient } from '../../../services/httpClient';
 
 export const Courses = () => {

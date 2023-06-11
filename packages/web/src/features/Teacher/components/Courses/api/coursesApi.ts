@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
-import { ICoursesApi } from './useCourses';
+import { ICoursesApi } from '../hooks/useCourses';
 
 export const coursesApi = (httpClient: AxiosInstance): ICoursesApi => ({
   getCourses: async (teacherId: string | undefined) => {
-    const res = await httpClient.get(`/teacher/${teacherId}/courses`);  
+    const res = await httpClient.get(`/teacher/${teacherId}/courses`);
     return res.data;
   },
 });

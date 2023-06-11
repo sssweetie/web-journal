@@ -4,8 +4,8 @@ import { Course } from '../Course';
 import { PlannedEvent } from '../PlannedEvent';
 import { httpClient } from '../../../services/httpClient';
 import { Schedule } from '@web-journal/libs';
-import { useCourses } from '../Courses/useCourses';
-import { coursesApi } from '../Courses/coursesApi';
+import { useCourses } from '../Courses/hooks/useCourses';
+import { coursesApi } from '../Courses/api/coursesApi';
 import { useCalendar } from '../../../Calendar/hooks/useCalendar';
 import { calendarApi } from '../../../Calendar/api/calendarApi';
 
