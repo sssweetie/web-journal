@@ -1,17 +1,17 @@
 import * as S from './styled';
 import { Link, useParams } from 'react-router-dom';
-import { Course } from '../Course';
-import { PlannedEvent } from '../PlannedEvent';
 import { httpClient } from '../../../services/httpClient';
 import { Schedule } from '@web-journal/libs';
 import { useCourses } from '../Courses/hooks/useCourses';
 import { coursesApi } from '../Courses/api/coursesApi';
 import { useCalendar } from '../../../Calendar/hooks/useCalendar';
 import { calendarApi } from '../../../Calendar/api/calendarApi';
+import { Course } from '../Courses/components/Course';
+import { UpcomingActivity } from '../UpcomingActivity';
 
 export const MainContent = () => {
   const { courses } = useCourses(coursesApi(httpClient));
-  const { recentlyActivities } = useCalendar(calendarApi(httpClient));
+  const { upcomingActivities } = useCalendar(calendarApi(httpClient));
   const params = useParams();
 
   return (
@@ -29,10 +29,13 @@ export const MainContent = () => {
         <S.Title style={{ marginTop: '60px' }}>Ближайшие события</S.Title>
       </Link>
       <S.Events>
-        {recentlyActivities.map(
-          (recentlyActivity: Schedule, index: number) =>
+        {upcomingActivities.map(
+          (upcomingActivity: Schedule, index: number) =>
             index < 4 && (
-              <PlannedEvent key={index} plannedEvent={recentlyActivity} />
+              <UpcomingActivity
+                key={index}
+                upcomingActivity={upcomingActivity}
+              />
             )
         )}
       </S.Events>

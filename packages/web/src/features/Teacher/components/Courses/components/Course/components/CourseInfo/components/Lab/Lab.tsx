@@ -4,15 +4,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useNavigate, useParams } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
-import { IHomework, useLab } from './useLab';
-import { labApi } from './labApi';
+import { IHomework, useLab } from './hooks/useLab';
+import { labApi } from './api/labApi';
 import { Button } from '@mui/material';
 
 export const Lab = () => {

@@ -17,7 +17,7 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
   const params = useParams();
 
   const [activities, setActivities] = useState<any>([]);
-  const [recentlyActivities, setRecentlyActivities] = useState<any>([]);
+  const [upcomingActivities, setUpcomingActivities] = useState<Schedule[]>([]);
   const getActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);
@@ -41,7 +41,7 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
     }
   };
 
-  const getRecentlyActivities = async () => {
+  const getUpcomingActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);
       const activities = generateActivities(res);
@@ -49,8 +49,8 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
         const date = moment(activity.startDate);
         return date.isSameOrAfter(moment());
       });
-      const sortedRecentlyActivities = sortByDate(recentlyActivities);
-      setRecentlyActivities(sortedRecentlyActivities);
+      const sortedUpcomingActivities = sortByDate(recentlyActivities);
+      setUpcomingActivities(sortedUpcomingActivities);
     } catch (error) {
       console.log(error);
     }
@@ -58,8 +58,8 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
 
   useEffect(() => {
     getActivities();
-    getRecentlyActivities();
+    getUpcomingActivities();
   }, []);
 
-  return { activities, rescheduleActivity, recentlyActivities };
+  return { activities, rescheduleActivity, upcomingActivities };
 };

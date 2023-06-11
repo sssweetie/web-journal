@@ -4,12 +4,12 @@ import { Teacher } from '../features/Teacher/Teacher';
 import * as S from './styled';
 import { Route, Routes } from 'react-router-dom';
 import { Calendar } from '../features/Calendar';
-import { CourseInfo } from '../features/Teacher/components/Course/components/CourseInfo';
 import { MainContent } from '../features/Teacher/components/MainContent';
-import { Lab } from '../features/Teacher/components/Course/components/CourseInfo/components/Lab';
 import { Title } from '../features/Teacher/components/MainContent/styled';
 import { Settings } from '../features/Teacher/components/Settings';
 import { Courses } from '../features/Teacher/components/Courses';
+import { Lab } from '../features/Teacher/components/Courses/components/Course/components/CourseInfo/components/Lab';
+import { CourseInfo } from '../features/Teacher/components/Courses/components/Course/components/CourseInfo';
 
 export function App() {
   return (
@@ -18,9 +18,7 @@ export function App() {
         <Route path="/api/login" element={<Login />} />
         <Route
           path="/api/teacher/:teacherId/main"
-          element={
-            <Teacher content={<MainContent />} />
-          }
+          element={<Teacher content={<MainContent />} />}
         />
         <Route
           path="/api/teacher/:teacherId/courses"

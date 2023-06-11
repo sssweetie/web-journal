@@ -7,9 +7,9 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCourse } from './hooks/useCourse';
 import { courseApi } from './api/courseApi';
-import { httpClient } from '../../../../../services/httpClient';
-import { Button, Modal } from '@mui/material';
+import { Button } from '@mui/material';
 import { ModalEditLab } from './components/ModalEditLab';
+import { httpClient } from 'packages/web/src/features/services/httpClient';
 
 export const CourseInfo = () => {
   const [open, setOpen] = useState(false);
