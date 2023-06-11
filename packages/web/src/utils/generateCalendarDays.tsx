@@ -33,7 +33,7 @@ export const generateCalendarDays = (
       (activity: Schedule) =>
         moment(activity.startDate).isSame(moment(currentDate).date(i), 'day') &&
         !activity.excludeDate.includes(
-          moment(activity.startDate).format('YYYY-MM-DD')
+          moment(activity.startDate).format('MM.DD.YYYY')
         )
     );
 

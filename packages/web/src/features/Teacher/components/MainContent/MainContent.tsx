@@ -3,17 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import { Course } from '../Course';
 import { PlannedEvent } from '../PlannedEvent';
 import { httpClient } from '../../../services/httpClient';
-import { IPlannedEvent } from '@web-journal/libs';
+import { Schedule } from '@web-journal/libs';
 import { useCourses } from '../Courses/useCourses';
 import { coursesApi } from '../Courses/coursesApi';
+import { useCalendar } from '../../../Calendar/hooks/useCalendar';
+import { calendarApi } from '../../../Calendar/api/calendarApi';
 
-interface Props {
-  plannedEvents: IPlannedEvent[];
-}
-
-export const MainContent = ({ plannedEvents }: Props) => {
+export const MainContent = () => {
   const { courses } = useCourses(coursesApi(httpClient));
-
+  const { recentlyActivities } = useCalendar(calendarApi(httpClient));
   const params = useParams();
 
   return (
@@ -31,10 +29,10 @@ export const MainContent = ({ plannedEvents }: Props) => {
         <S.Title style={{ marginTop: '60px' }}>Ближайшие события</S.Title>
       </Link>
       <S.Events>
-        {plannedEvents.map(
-          (plannedEvent: any, index: number) =>
+        {recentlyActivities.map(
+          (recentlyActivity: Schedule, index: number) =>
             index < 4 && (
-              <PlannedEvent key={index} plannedEvent={plannedEvent} />
+              <PlannedEvent key={index} plannedEvent={recentlyActivity} />
             )
         )}
       </S.Events>

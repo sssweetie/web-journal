@@ -1,5 +1,6 @@
 import { Schedule } from '@web-journal/libs';
-import { generateActivities } from 'packages/web/src/utils';
+import moment from 'moment';
+import { generateActivities, sortByDate } from 'packages/web/src/utils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -16,7 +17,7 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
   const params = useParams();
 
   const [activities, setActivities] = useState<any>([]);
-
+  const [recentlyActivities, setRecentlyActivities] = useState<any>([]);
   const getActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);
@@ -40,9 +41,25 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
     }
   };
 
+  const getRecentlyActivities = async () => {
+    try {
+      const res = await calendarApi.get(params.teacherId);
+      const activities = generateActivities(res);
+      const recentlyActivities = activities.filter((activity: Schedule) => {
+        const date = moment(activity.startDate);
+        return date.isSameOrAfter(moment());
+      });
+      const sortedRecentlyActivities = sortByDate(recentlyActivities);
+      setRecentlyActivities(sortedRecentlyActivities);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getActivities();
+    getRecentlyActivities();
   }, []);
 
-  return { activities, rescheduleActivity };
+  return { activities, rescheduleActivity, recentlyActivities };
 };

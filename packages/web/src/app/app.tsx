@@ -12,33 +12,6 @@ import { Settings } from '../features/Teacher/components/Settings';
 import { Courses } from '../features/Teacher/components/Courses';
 
 export function App() {
-  const plannedEvents = [
-    {
-      type: 'Заседание кафедры',
-      date: 'ПН 14:00',
-      name: '-',
-      backgroundColor: '#99FF99',
-    },
-    {
-      type: 'Семинар',
-      date: 'ВТ 16:00',
-      name: 'Урок 6: XXX ',
-      backgroundColor: '#FFFF99',
-    },
-    {
-      type: 'Лекция',
-      date: 'ВТ 10:00',
-      name: 'Урок 3: YYY',
-      backgroundColor: '#FFCCFF',
-    },
-    {
-      type: 'Лабораторная работа',
-      date: 'ВТ 12:00',
-      name: 'Урок 1: ZZZ',
-      backgroundColor: '#CCFFFF',
-    },
-  ];
-
   return (
     <S.Wrapper>
       <Routes>
@@ -46,7 +19,7 @@ export function App() {
         <Route
           path="/api/teacher/:teacherId/main"
           element={
-            <Teacher content={<MainContent plannedEvents={plannedEvents} />} />
+            <Teacher content={<MainContent />} />
           }
         />
         <Route
