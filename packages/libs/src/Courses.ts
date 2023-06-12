@@ -5,9 +5,15 @@ interface GroupsId {
   ref: string;
 }
 
+interface File {
+  name: string;
+  data: Buffer;
+}
+
 interface Lab {
   name: string;
   maxMark: number;
+  file: File[];
   homework: Homework[];
 }
 

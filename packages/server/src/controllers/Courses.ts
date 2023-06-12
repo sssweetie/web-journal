@@ -1,4 +1,5 @@
 // import { IHomework } from '@web-journal/libs';
+import mongoose from 'mongoose';
 import { CoursesModel } from '../models/Courses';
 import { GroupsController } from './Groups';
 
@@ -38,5 +39,17 @@ export const CoursesController = {
         ],
       }
     );
+  },
+
+  updateLab: async (id: any, file: any) => {
+    const objectId = new mongoose.Types.ObjectId(id);
+    const res = await CoursesModel.findOneAndUpdate(
+      { labs: { $elemMatch: { _id: objectId } } },
+      { 'labs.$': 1 }
+    );
+    console.log(res);
+    // if (res) {
+    //   const lab = res.labs.find((lab) => lab._id.toString() === id);
+    // }
   },
 };

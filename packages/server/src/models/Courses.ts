@@ -17,6 +17,12 @@ const coursesSchema = new Schema<Courses>({
     {
       name: String,
       maxMark: Number,
+      file: [
+        {
+          name: String,
+          data: Buffer,
+        },
+      ],
       homework: [
         {
           studentsId: {

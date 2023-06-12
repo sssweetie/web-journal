@@ -12,6 +12,17 @@ coursesRouter.get('/:teacherId/course/:courseId', async (req, res) => {
   }
 });
 
+coursesRouter.post(
+  '/:teacherId/course/:courseId/lab/:labId/edit',
+  async (req, res) => {
+    try {
+      const res = await CoursesController.updateLab(req.params.labId, req.body);
+    } catch {
+      res.status(500);
+    }
+  }
+);
+
 coursesRouter.put(
   '/:teacherId/course/:courseId/lab/:labId/:studentId',
   async (req, res) => {
