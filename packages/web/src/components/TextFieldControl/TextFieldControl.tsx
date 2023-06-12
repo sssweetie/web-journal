@@ -7,6 +7,7 @@ interface Props {
   icon: ReactNode;
   children: any;
   register: any;
+  hidden?: boolean;
 }
 
 export const TextFieldControl = ({
@@ -14,6 +15,7 @@ export const TextFieldControl = ({
   icon,
   register,
   children,
+  hidden,
 }: PropsWithChildren<Props>) => {
   return (
     <TextField
@@ -21,6 +23,7 @@ export const TextFieldControl = ({
       {...register(attachment)}
       label={children}
       required={true}
+      type={hidden ? 'password' : 'text'}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">{icon}</InputAdornment>

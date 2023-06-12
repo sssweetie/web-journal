@@ -11,7 +11,7 @@ loginRouter.post('/', async (req, res) => {
     } else if (req.body.password !== user.password) {
       res.status(401).send({ message: 'Неверный пароль' });
     } else {
-      res.status(200).send({ message: 'Вход выполнен успешно' });
+      res.status(200).send({ message: user.teacherId });
     }
   } catch {
     res.status(500).send({ message: 'Ошибка при входе' });

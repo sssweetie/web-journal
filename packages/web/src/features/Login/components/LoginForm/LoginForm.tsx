@@ -8,7 +8,6 @@ import { TextFieldControl } from 'packages/web/src/components/TextFieldControl';
 
 export interface Action {
   login: (data: User) => Promise<void>;
-  isLogged: boolean;
   serverError: string | undefined;
 }
 
@@ -32,6 +31,7 @@ export const LoginForm = ({ action }: Props) => {
       <TextFieldControl
         register={register}
         attachment="password"
+        hidden={true}
         icon={<PasswordIcon />}
       >
         Пароль
