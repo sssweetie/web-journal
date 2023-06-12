@@ -2,6 +2,8 @@ import { StudentsModel } from '../models/Students';
 import { CoursesModel } from '../models/Courses';
 
 export const StudentsController = {
+
+  // Получить лабораторные работы и студентов
   getStudents: async (studentsId: string[], labsId: string, courseId) => {
     const students = await Promise.all(
       studentsId.map(

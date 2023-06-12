@@ -3,10 +3,13 @@ import { ScheduleModel } from '../models/Schedule';
 import mongoose from 'mongoose';
 
 export const ScheduleController = {
+  // Получить расписание
   getSchedule: async (id: string) => {
     const res = await ScheduleModel.find({ teacherId: id });
     return res;
   },
+
+  // Перенести расписание
   rescheduleActivity: async (
     id: string,
     excludeDate: string,

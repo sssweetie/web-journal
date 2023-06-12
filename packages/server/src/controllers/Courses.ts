@@ -1,15 +1,16 @@
-// import { IHomework } from '@web-journal/libs';
 import mongoose from 'mongoose';
 import { CoursesModel } from '../models/Courses';
 import { GroupsController } from './Groups';
 import { FileDB } from '@web-journal/libs';
 
 export const CoursesController = {
+  // Получить информацию по курсу
   getData: async (courseId: string) => {
     const result = await CoursesModel.findById(courseId);
     return result;
   },
 
+  // Получить информацию по всем курсам, сопоставив их с группами
   getAllCourses: async (teacherId: string) => {
     const courseData = await CoursesModel.find({ teacherId });
     const promises = courseData.map((course: any) =>
@@ -19,6 +20,7 @@ export const CoursesController = {
     return { courseData, groups };
   },
 
+  //Обновить статус домашней работы
   updateHomework: async (homework: any) => {
     await CoursesModel.updateOne(
       {
@@ -41,7 +43,8 @@ export const CoursesController = {
       }
     );
   },
-
+  
+  //Обновить документ в лабораторной работе
   updateLab: async (id: string, file: FileDB) => {
     try {
       const newFile = {
