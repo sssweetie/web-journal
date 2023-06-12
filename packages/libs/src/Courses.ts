@@ -5,9 +5,9 @@ interface GroupsId {
   ref: string;
 }
 
-interface File {
+export interface FileDB {
   name: string;
-  data: Buffer;
+  data: string;
 }
 
 interface Lab {

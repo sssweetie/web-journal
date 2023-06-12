@@ -4,17 +4,33 @@ import * as S from './styled';
 import { Button, IconButton, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useModalLab } from './hooks/useModalLab';
+import { modalLabApi } from './api/modalLabApi';
+import { httpClient } from 'packages/web/src/features/services/httpClient';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  labId: string;
 }
 
-export const ModalEditLab = ({ isOpen, onClose }: Props) => {
+export const ModalEditLab = ({ isOpen, onClose, labId }: Props) => {
   const { register, handleSubmit } = useForm();
+  const { uploadDocument } = useModalLab(modalLabApi(httpClient));
+  const location = useLocation();
 
-  const onSubmit = () => {
-    console.log('123');
+  const onSubmit = async (data: any) => {
+    const reader = new FileReader();
+    reader.readAsText(data.file[0]);
+    reader.onload = async () => {
+      const fileData = reader.result;
+      await uploadDocument(
+        { name: data.file[0].name, data: String(fileData) },
+        labId,
+        location.pathname.slice(4)
+      );
+    };
   };
 
   return (
@@ -30,23 +46,23 @@ export const ModalEditLab = ({ isOpen, onClose }: Props) => {
           label="Максимальный балл"
         />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <a
+          <a></a>
+          {/* <a
             style={{ alignSelf: 'center' }}
             href="Лабораторная работа 1"
             download=""
           >
             Лабораторная работа 1
-          </a>
+          </a> */}
           <IconButton>
             <DeleteIcon fontSize="small" />
           </IconButton>
         </div>
         <S.DownloadArea>Загрузить файлы</S.DownloadArea>
-        <S.ButtonWrapper>
-          
-        </S.ButtonWrapper>
-
-        <Button variant="contained">Подтвердить</Button>
+        <input {...register('file')} type="file" />
+        <Button variant="contained" type="submit">
+          Подтвердить
+        </Button>
       </S.Wrapper>
     </Modal>
   );

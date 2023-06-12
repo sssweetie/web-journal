@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 import { CoursesModel } from '../models/Courses';
 import { GroupsController } from './Groups';
+import { FileDB } from '@web-journal/libs';
 
 export const CoursesController = {
   getData: async (courseId: string) => {
@@ -41,15 +42,21 @@ export const CoursesController = {
     );
   },
 
-  updateLab: async (id: any, file: any) => {
-    const objectId = new mongoose.Types.ObjectId(id);
-    const res = await CoursesModel.findOneAndUpdate(
-      { labs: { $elemMatch: { _id: objectId } } },
-      { 'labs.$': 1 }
-    );
-    console.log(res);
-    // if (res) {
-    //   const lab = res.labs.find((lab) => lab._id.toString() === id);
-    // }
+  updateLab: async (id: string, file: FileDB) => {
+    try {
+      const newFile = {
+        _id: new mongoose.Types.ObjectId(),
+        name: file.name,
+        data: file.data,
+      };
+
+      await CoursesModel.updateOne(
+        { 'labs._id': id },
+        { $push: { 'labs.$.file': newFile } },
+        { new: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   },
 };

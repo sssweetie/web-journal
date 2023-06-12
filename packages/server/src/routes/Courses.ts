@@ -8,7 +8,7 @@ coursesRouter.get('/:teacherId/course/:courseId', async (req, res) => {
     const result = await CoursesController.getData(req.params.courseId);
     res.status(200).send(result);
   } catch {
-    res.status(400);
+    res.sendStatus(400);
   }
 });
 
@@ -16,9 +16,10 @@ coursesRouter.post(
   '/:teacherId/course/:courseId/lab/:labId/edit',
   async (req, res) => {
     try {
-      const res = await CoursesController.updateLab(req.params.labId, req.body);
-    } catch {
-      res.status(500);
+      await CoursesController.updateLab(req.params.labId, req.body);
+      res.sendStatus(200);
+    } catch (error) {
+      res.status(500).send(error);
     }
   }
 );
@@ -46,6 +47,6 @@ coursesRouter.get('/:teacherId/courses', async (req, res) => {
     const courses = await CoursesController.getAllCourses(req.params.teacherId);
     res.status(200).send(courses);
   } catch {
-    res.status(400);
+    res.sendStatus(400);
   }
 });

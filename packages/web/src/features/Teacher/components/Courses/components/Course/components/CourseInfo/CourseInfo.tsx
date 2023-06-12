@@ -16,7 +16,7 @@ import * as S from './styled';
 export const CourseInfo = () => {
   const [open, setOpen] = useState(false);
   const { courseInfo, statement } = useCourse(courseApi(httpClient));
-
+  const [targetId, setTargetId] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -80,7 +80,14 @@ export const CourseInfo = () => {
                   <TableCell align="center">{average}</TableCell>
                   <TableCell align="center">{lab.maxMark}</TableCell>
                   <TableCell align="center">
-                    <Button variant="outlined" onClick={() => setOpen(true)}>
+                    <Button
+                      id={lab._id}
+                      variant="outlined"
+                      onClick={(e: any) => {
+                        setOpen(true);
+                        setTargetId(e.target.id);
+                      }}
+                    >
                       Редактировать
                     </Button>
                   </TableCell>
@@ -96,7 +103,7 @@ export const CourseInfo = () => {
       >
         Распечатать ведомость
       </Button>
-      <ModalEditLab isOpen={open} onClose={onClose} />
+      <ModalEditLab isOpen={open} onClose={onClose} labId={targetId} />
     </S.Wrapper>
   );
 };

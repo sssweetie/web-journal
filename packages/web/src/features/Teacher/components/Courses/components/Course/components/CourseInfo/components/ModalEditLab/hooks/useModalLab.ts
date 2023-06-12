@@ -1,7 +1,9 @@
+import { FileDB } from '@web-journal/libs';
+
 export interface ModalLabApi {
   uploadDocument: (
-    file: any,
-    labId: string | undefined,
+    file: FileDB,
+    labId: string,
     url: string | undefined
   ) => Promise<void>;
   downloadDocument: () => Promise<void>;
@@ -9,8 +11,8 @@ export interface ModalLabApi {
 
 export const useModalLab = (modalLabApi: ModalLabApi) => {
   const uploadDocument = async (
-    file: any,
-    labId: string | undefined,
+    file: FileDB,
+    labId: string,
     url: string | undefined
   ) => {
     try {

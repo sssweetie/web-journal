@@ -20,7 +20,7 @@ const coursesSchema = new Schema<Courses>({
       file: [
         {
           name: String,
-          data: Buffer,
+          data: String,
         },
       ],
       homework: [
