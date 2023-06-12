@@ -11,13 +11,15 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
 import { Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { useCourse } from '../../hooks/useCourse';
+import { courseApi } from '../../api/courseApi';
+import { httpClient } from 'packages/web/src/features/services/httpClient';
 
 export const Lab = () => {
   const [status, setStatus] = React.useState('Проверено');
   const [open, setOpen] = React.useState(false);
   const [homework, setHomework] = React.useState<any>({});
-  const { state } = useLocation();
-  const { students, getStudents } = state;
+  const { students, getStudents } = useCourse(courseApi(httpClient));
 
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
@@ -64,35 +66,36 @@ export const Lab = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {students
-            .filter((row: any) => row.checked === status || status === 'Все')
-            .map((row: any) => (
-              <TableRow
-                id={row._id}
-                key={row.name}
-                sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                }}
-              >
-                <TableCell
-                  component="th"
-                  scope="row"
+          {students &&
+            students
+              .filter((row: any) => row.checked === status || status === 'Все')
+              .map((row: any) => (
+                <TableRow
+                  id={row._id}
+                  key={row.name}
                   sx={{
-                    '&:hover': { cursor: 'pointer' },
+                    '&:last-child td, &:last-child th': { border: 0 },
                   }}
                 >
-                  {row.name}
-                </TableCell>
-                <TableCell align="center">{row.date}</TableCell>
-                <TableCell align="center">{row.mark}</TableCell>
-                <TableCell align="center">{row.checked}</TableCell>
-                <TableCell align="center">
-                  <Button variant="outlined" onClick={() => handleClick(row)}>
-                    Проверить
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      '&:hover': { cursor: 'pointer' },
+                    }}
+                  >
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center">{row.date}</TableCell>
+                  <TableCell align="center">{row.mark}</TableCell>
+                  <TableCell align="center">{row.checked}</TableCell>
+                  <TableCell align="center">
+                    <Button variant="outlined" onClick={() => handleClick(row)}>
+                      Проверить
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
       <ModalInfo

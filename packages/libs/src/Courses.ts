@@ -24,6 +24,7 @@ export interface Homework {
   studentId: string;
   comment: string;
   mark: number;
+  date: string;
   courseId?: string;
   pathname?: string;
   labId?: string;

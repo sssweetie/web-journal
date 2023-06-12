@@ -18,7 +18,6 @@ export const useTeacher = (teacherApi: TeacherApi) => {
         teacher: res._doc,
       };
 
-      console.log(teacher);
       setTeacher(teacher);
     } catch (err) {
       console.error(err);
@@ -27,10 +26,6 @@ export const useTeacher = (teacherApi: TeacherApi) => {
 
   useEffect(() => {
     getPersonalInfo();
-
-    return () => {
-      console.log('Cleaning function teacher');
-    };
   }, []);
 
   return { getPersonalInfo, teacher };

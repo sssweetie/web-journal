@@ -32,7 +32,6 @@ coursesRouter.put(
 
 coursesRouter.get('/:teacherId/courses', async (req, res) => {
   try {
-    console.log(req.params);
     const courses = await CoursesController.getAllCourses(req.params.teacherId);
     res.status(200).send(courses);
   } catch {

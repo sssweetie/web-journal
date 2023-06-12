@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,9 +15,8 @@ import * as S from './styled';
 
 export const CourseInfo = () => {
   const [open, setOpen] = useState(false);
-  const { courseInfo, statement, getStudents } = useCourse(
-    courseApi(httpClient)
-  );
+  const { courseInfo, statement } = useCourse(courseApi(httpClient));
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,12 +24,16 @@ export const CourseInfo = () => {
     setOpen(false);
   };
 
-  const onClick = (lab: any) => {
+  const onClick = async (lab: any) => {
     const studentsId = lab.homework.map((homework: any) => homework._id);
 
     navigate(
       `${location.pathname}/lab/${lab._id}?students=${studentsId.join(',')}`,
-      { state: { students: statement, getStudents } }
+      {
+        state: {
+          students: statement,
+        },
+      }
     );
   };
 
@@ -52,8 +55,10 @@ export const CourseInfo = () => {
                 (acc: number, cur: any) => (acc += cur.mark),
                 0
               );
+
               const average =
                 lab.homework.length > 0 ? sum / lab.homework.length : 0;
+
               return (
                 <TableRow
                   key={lab.name}

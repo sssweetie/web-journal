@@ -94,7 +94,6 @@ export const Docx = (statement: Student[]) => {
       })
   );
 
-  console.log(tbody);
 
   const table = new Table({
     rows: [
