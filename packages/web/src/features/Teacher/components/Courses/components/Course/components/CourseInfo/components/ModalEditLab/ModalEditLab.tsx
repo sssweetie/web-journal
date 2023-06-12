@@ -8,14 +8,16 @@ import { useModalLab } from './hooks/useModalLab';
 import { modalLabApi } from './api/modalLabApi';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
 import { useLocation } from 'react-router-dom';
+import { FileDB } from '@web-journal/libs';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   labId: string;
+  files: FileDB[];
 }
 
-export const ModalEditLab = ({ isOpen, onClose, labId }: Props) => {
+export const ModalEditLab = ({ isOpen, onClose, labId, files }: Props) => {
   const { register, handleSubmit } = useForm();
   const { uploadDocument } = useModalLab(modalLabApi(httpClient));
   const location = useLocation();
@@ -45,19 +47,16 @@ export const ModalEditLab = ({ isOpen, onClose, labId }: Props) => {
           {...register('maxMark', { required: true })}
           label="Максимальный балл"
         />
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <a></a>
-          {/* <a
-            style={{ alignSelf: 'center' }}
-            href="Лабораторная работа 1"
-            download=""
-          >
-            Лабораторная работа 1
-          </a> */}
-          <IconButton>
-            <DeleteIcon fontSize="small" />
-          </IconButton>
-        </div>
+        <S.FilesWrapper>
+          {files.map((file: FileDB) => (
+            <S.File>
+              <a>{file.name}</a>
+              <IconButton>
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </S.File>
+          ))}
+        </S.FilesWrapper>
         <S.DownloadArea>Загрузить файлы</S.DownloadArea>
         <input {...register('file')} type="file" />
         <Button variant="contained" type="submit">

@@ -1,4 +1,5 @@
 import { Homework, Student } from '@web-journal/libs';
+import { useAppDispatch } from 'packages/web/src/store/hooks';
 import { getStudentsHomework } from 'packages/web/src/utils';
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
@@ -26,14 +27,12 @@ export const useCourse = (courseApi: CourseApi) => {
   const [courseInfo, setCourseInfo] = useState<Course | undefined>(undefined);
   const [statement, setStatement] = useState<Statement[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
-
   const params = useParams();
 
   const getCourseInfo = async () => {
     try {
       setLoader(true);
       const res = await courseApi.getCourse(params.courseId);
-      console.log(res);
       setCourseInfo(res);
     } catch (err) {
       console.error(err);

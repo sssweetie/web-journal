@@ -33,3 +33,16 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const FilesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+`;
+
+export const File = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

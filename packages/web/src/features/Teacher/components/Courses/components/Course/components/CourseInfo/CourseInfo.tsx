@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,10 +12,12 @@ import { ModalEditLab } from './components/ModalEditLab';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
 import { Docx } from './components/ModalEditLab/components/Docx';
 import * as S from './styled';
+import { FileDB } from '@web-journal/libs';
 
 export const CourseInfo = () => {
   const [open, setOpen] = useState(false);
   const { courseInfo, statement } = useCourse(courseApi(httpClient));
+  const [files, setFiles] = useState<FileDB[]>([]);
   const [targetId, setTargetId] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -86,6 +88,11 @@ export const CourseInfo = () => {
                       onClick={(e: any) => {
                         setOpen(true);
                         setTargetId(e.target.id);
+
+                        const res = courseInfo.labs.find(
+                          (lab: any) => lab._id === e.target.id
+                        );
+                        setFiles(res.file);
                       }}
                     >
                       Редактировать
@@ -103,7 +110,12 @@ export const CourseInfo = () => {
       >
         Распечатать ведомость
       </Button>
-      <ModalEditLab isOpen={open} onClose={onClose} labId={targetId} />
+      <ModalEditLab
+        isOpen={open}
+        onClose={onClose}
+        labId={targetId}
+        files={files}
+      />
     </S.Wrapper>
   );
 };
