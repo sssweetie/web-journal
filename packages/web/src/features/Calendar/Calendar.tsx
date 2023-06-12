@@ -5,8 +5,12 @@ import { useCalendar } from './hooks/useCalendar';
 import { calendarApi } from './api/calendarApi';
 import { httpClient } from '../services/httpClient';
 import { generateCalendarDays } from '../../utils';
+import { SliderButtons } from '../../components/SliderButtons';
+import { useNavigate, useParams } from 'react-router';
 
 export const Calendar = () => {
+  const navigate = useNavigate();
+  const params = useParams();
   const { activities, rescheduleActivity } = useCalendar(
     calendarApi(httpClient)
   );
@@ -25,11 +29,15 @@ export const Calendar = () => {
 
   return (
     <S.Calendar>
-      <S.CalendarHeader>
-        <button onClick={prevMonth}>Previous</button>
-        <S.YearMonth>{currentDate.format('MMMM YYYY')}</S.YearMonth>
-        <button onClick={nextMonth}>Next</button>
+      <S.CalendarHeader
+        onClick={() => navigate(`/api/teacher/${params.teacherId}/main`)}
+      >
+        {currentDate.format('MMMM YYYY')}
       </S.CalendarHeader>
+      <SliderButtons
+        leftButtonFunction={prevMonth}
+        rightButtonFunction={nextMonth}
+      />
       <S.WeekDays>
         {weekdaysShort.map((weekday, index) => (
           <S.WeekDay key={index}>{weekday}</S.WeekDay>

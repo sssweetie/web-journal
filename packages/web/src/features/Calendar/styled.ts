@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const BlankDay = styled.div`
-  width: 130px;
-  height: 130px;
   border: 1px solid #cccccc;
   padding: 8px;
   gap: 4px;
@@ -11,7 +9,6 @@ export const BlankDay = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
   opacity: 50%;
 `;
 
@@ -20,24 +17,24 @@ export const Calendar = styled.div`
   margin: 0 auto;
 `;
 
-export const CalendarHeader = styled.div`
+export const CalendarHeader = styled.h1`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
-
-export const YearMonth = styled.h1`
   font-size: 20px;
   font-weight: bold;
   text-transform: capitalize;
-  margin: 0;
+  align-items: center;
+  justify-content: center;
+  margin: 24px;
+
+  cursor: pointer;
+  &:hover {
+    opacity: 60%;
+  }
 `;
 
 export const WeekDays = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
   font-weight: bold;
 `;
 
@@ -53,4 +50,5 @@ export const CalendarBody = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
+  margin-top: 10px;
 `;

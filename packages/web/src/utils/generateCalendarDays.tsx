@@ -27,7 +27,8 @@ export const generateCalendarDays = (
 
   const days = [];
   for (let i = 1; i <= daysInMonth(); i++) {
-    const isCurrentDay = i === currentDate.date();
+    const isCurrentDay =
+      i === currentDate.date() && currentDate.isSame(moment(), 'month');
 
     const dayActivities: Schedule[] = activities.filter(
       (activity: Schedule) =>

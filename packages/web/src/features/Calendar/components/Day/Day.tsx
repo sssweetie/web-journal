@@ -20,8 +20,8 @@ export const Day = ({
   rescheduleActivity,
 }: Props) => {
   return (
-    <S.Wrapper $today={today}>
-      <S.DayNumber>{children}</S.DayNumber>
+    <S.Wrapper>
+      <S.DayNumber $today={today}>{children}</S.DayNumber>
       <S.ActivitiesWrapper>
         {activities &&
           sortByTime(activities).map((activity: Schedule, index: number) => {
