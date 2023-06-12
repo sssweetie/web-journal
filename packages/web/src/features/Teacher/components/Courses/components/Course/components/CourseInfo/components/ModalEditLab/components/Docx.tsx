@@ -82,7 +82,7 @@ export const Docx = (statement: Student[]) => {
           new TableCell({
             children: [
               new Paragraph({
-                text: numberMarkToString(student.mark),
+                text: numberMarkToString(student.mark / 0.6),
                 alignment: AlignmentType.CENTER,
               }),
             ],
@@ -93,7 +93,6 @@ export const Docx = (statement: Student[]) => {
         ],
       })
   );
-
 
   const table = new Table({
     rows: [

@@ -33,6 +33,7 @@ export const useCourse = (courseApi: CourseApi) => {
     try {
       setLoader(true);
       const res = await courseApi.getCourse(params.courseId);
+      console.log(res);
       setCourseInfo(res);
     } catch (err) {
       console.error(err);
