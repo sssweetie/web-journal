@@ -17,8 +17,10 @@ export const TextFieldControl = ({
 }: PropsWithChildren<Props>) => {
   return (
     <TextField
-      {...register(attachment, { required: true })}
+      sx={{ width: '95%' }}
+      {...register(attachment)}
       label={children}
+      required={true}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">{icon}</InputAdornment>

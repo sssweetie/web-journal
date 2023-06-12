@@ -2,8 +2,6 @@ import React, { FormEvent } from 'react';
 import * as S from './styled';
 import PasswordIcon from '@mui/icons-material/Password';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { loginApi } from '../../loginApi';
-import { httpClient } from '../../../services/httpClient';
 import { useFormLogin } from './hooks/useLoginForm';
 import { User } from '@web-journal/libs';
 import { TextFieldControl } from 'packages/web/src/components/TextFieldControl';
@@ -11,6 +9,7 @@ import { TextFieldControl } from 'packages/web/src/components/TextFieldControl';
 export interface Action {
   login: (data: User) => Promise<void>;
   isLogged: boolean;
+  serverError: string | undefined;
 }
 
 interface Props {
@@ -22,7 +21,7 @@ export const LoginForm = ({ action }: Props) => {
 
   return (
     <S.Form onSubmit={handleSubmit}>
-      <S.FormTitle>Log in</S.FormTitle>
+      <S.FormTitle>Вход</S.FormTitle>
       <TextFieldControl
         register={register}
         attachment="login"
@@ -37,7 +36,8 @@ export const LoginForm = ({ action }: Props) => {
       >
         Пароль
       </TextFieldControl>
-      <S.LoginButton>Log in</S.LoginButton>
+      <S.LoginButton>Отправить</S.LoginButton>
+      {action.serverError && <S.Error>{action.serverError}</S.Error>}
     </S.Form>
   );
 };

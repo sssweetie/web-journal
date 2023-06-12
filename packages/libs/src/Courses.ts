@@ -8,8 +8,7 @@ interface GroupsId {
 interface Lab {
   name: string;
   maxMark: number;
-  passed: any[];
-  unpassed: any[];
+  homework: Homework[];
 }
 
 export interface Courses {

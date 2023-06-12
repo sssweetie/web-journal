@@ -5,7 +5,11 @@ import { useLogin } from './hooks/useLogin';
 import { httpClient } from '../services/httpClient';
 import { loginApi } from './loginApi';
 export const Login = () => {
-  const { login, isLogged } = useLogin(loginApi(httpClient));
+  const { login, isLogged, serverError } = useLogin(loginApi(httpClient));
 
-  return <Layout loginForm={<LoginForm action={{ login, isLogged }} />} />;
+  return (
+    <Layout
+      loginForm={<LoginForm action={{ login, isLogged, serverError }} />}
+    />
+  );
 };
