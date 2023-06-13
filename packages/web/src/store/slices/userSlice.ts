@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+//userSlice для логинизации пользователя 
 
 const initialState = {
   isLogged: null,
@@ -13,7 +14,7 @@ const userSlice = createSlice({
       state.id = action.payload.id;
       state.isLogged = action.payload.isLogged;
     },
-    logoutUser(state, action) {
+    logoutUser(state) {
       state.id = null;
       state.isLogged = null;
     },

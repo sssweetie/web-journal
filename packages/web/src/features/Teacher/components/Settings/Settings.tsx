@@ -4,7 +4,6 @@ import { useTeacher } from '../../hooks/useTeacher';
 import { teacherApi } from '../../teacherApi';
 import { httpClient } from '../../../services/httpClient';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
 
 export const Settings = () => {
   const { teacher } = useTeacher(teacherApi(httpClient));
@@ -14,15 +13,8 @@ export const Settings = () => {
     console.log('123');
   };
 
-  // useEffect(() => {
-  //   setValue('firstName', teacher.teacher?.firstName);
-  //   setValue('lastName', teacher.teacher?.lastName);
-  //   setValue('surname', teacher.teacher?.surname);
-  //   setValue('link', teacher.teacher?.link);
-  //   setValue('mail', teacher.teacher?.mail);
-  // }, []);
-
   return (
+    // Список настроек
     <>
       <h3>Настройки</h3>
       <S.FormWrapper onSubmit={handleSubmit(onSubmit)}>

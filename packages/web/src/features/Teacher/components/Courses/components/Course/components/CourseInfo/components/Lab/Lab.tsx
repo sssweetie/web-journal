@@ -10,7 +10,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ModalInfo } from './ModalInfo';
 import { Button } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 import { useCourse } from '../../hooks/useCourse';
 import { courseApi } from '../../api/courseApi';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
@@ -21,10 +20,12 @@ export const Lab = () => {
   const [homework, setHomework] = React.useState<any>({});
   const { students, getStudents } = useCourse(courseApi(httpClient));
 
+  // Отфильтровать таблицу
   const handleChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value);
   };
 
+  // Открыть модальное окно
   const handleClick = (row: any) => {
     setOpen(true);
     setHomework({
@@ -35,11 +36,13 @@ export const Lab = () => {
     });
   };
 
+  // Закрыть модальное окно
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
+    // Таблица домашних работ + модальное окно с проверкой домашних работ
     <>
       <FormControl fullWidth>
         <InputLabel id="select-status-label">Status</InputLabel>

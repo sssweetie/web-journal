@@ -20,6 +20,7 @@ export const Teacher = ({ content }: any) => {
   };
 
   return (
+    // UI отображение настроек и главной страницы
     <Layout
       content={content}
       navBar={

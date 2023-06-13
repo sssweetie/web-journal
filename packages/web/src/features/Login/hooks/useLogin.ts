@@ -13,6 +13,7 @@ export const useLogin = (loginApi: LoginApi) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  // Логинизация и статус авторизованного пользователя
   const login = async (data: User) => {
     try {
       const res = await loginApi.login(data);

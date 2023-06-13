@@ -18,6 +18,8 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
 
   const [activities, setActivities] = useState<any>([]);
   const [upcomingActivities, setUpcomingActivities] = useState<Schedule[]>([]);
+
+  // Получить активности преподавателя
   const getActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);
@@ -28,6 +30,7 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
     }
   };
 
+  // Перенести активность на другое время или день
   const rescheduleActivity = async (
     newActivity: Schedule,
     oldActivity: { id: string; currentDate: string }
@@ -41,6 +44,7 @@ export const useCalendar = (calendarApi: ICalendarApi) => {
     }
   };
 
+  // Получение ближайших активностей
   const getUpcomingActivities = async () => {
     try {
       const res = await calendarApi.get(params.teacherId);

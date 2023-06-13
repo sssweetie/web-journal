@@ -22,6 +22,7 @@ export const Course = ({ data }: Props) => {
   const navigate = useNavigate();
   const params = useParams();
   return (
+    // Общий блок отображения курса
     <S.Wrapper>
       <S.Background />
       <S.Container>

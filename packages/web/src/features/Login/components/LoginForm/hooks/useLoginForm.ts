@@ -5,6 +5,8 @@ import { Action } from '../LoginForm';
 
 export const useFormLogin = ({ login }: Action) => {
   const { register, handleSubmit } = useForm<User>();
+
+  // Логика формы авторизации
   const onSubmit = async (data: User) => {
     try {
       await login(data);

@@ -15,6 +15,7 @@ export const useNewModalForm = (
   const { register, handleSubmit, reset, setValue } = useForm<Homework>();
   const location = useLocation();
 
+  // Проверить домашнюю работу
   const submitHomework = async (homework: Homework) => {
     const pathname = location.pathname.slice(4);
     const newHomework = { ...homework, studentId, pathname };

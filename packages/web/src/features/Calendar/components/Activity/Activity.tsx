@@ -25,6 +25,7 @@ export const Activity = ({ activity, rescheduleActivity }: Props) => {
   };
 
   return (
+    // Активность преподавателя в течение дня - лабораторная, семинар, оекция, другое
     <>
       <S.Wrapper
         $borderColor={borderColor}

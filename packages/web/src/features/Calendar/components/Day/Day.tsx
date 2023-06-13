@@ -20,13 +20,14 @@ export const Day = ({
   rescheduleActivity,
 }: Props) => {
   return (
+    // День в календаре
     <S.Wrapper>
       <S.DayNumber $today={today}>{children}</S.DayNumber>
       <S.ActivitiesWrapper>
         {activities &&
           sortByTime(activities).map((activity: Schedule, index: number) => {
             return index < 6 ? (
-              <Activity
+              <Activity // Отображение первых 6-ти активностей
                 activity={activity}
                 rescheduleActivity={rescheduleActivity}
               />

@@ -10,6 +10,7 @@ interface Props {
 
 export const NavBar = ({ settings, personalInfo, navigateHandler }: Props) => {
   return (
+    // Навигационная панель
     <S.ProfileNavigation>
       <S.ProfileInfo>
         <S.Avatar />

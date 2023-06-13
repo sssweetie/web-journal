@@ -10,6 +10,8 @@ export interface ModalLabApi {
 }
 
 export const useModalLab = (modalLabApi: ModalLabApi) => {
+  // Редактирование информации о лабораторной работе
+  // Загрузка документа
   const uploadDocument = async (
     file: FileDB,
     labId: string,

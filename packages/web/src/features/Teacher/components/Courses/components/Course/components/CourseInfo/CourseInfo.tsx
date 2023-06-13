@@ -27,6 +27,8 @@ export const CourseInfo = () => {
   };
 
   const onClick = async (lab: any) => {
+
+    // query параметры для навигации на другую страницу
     const studentsId = lab.homework.map((homework: any) => homework._id);
 
     navigate(
@@ -40,6 +42,7 @@ export const CourseInfo = () => {
   };
 
   return (
+    // Таблица с лабораторными работами + редактированием лабораторных работ
     <S.Wrapper>
       <Table>
         <TableHead>

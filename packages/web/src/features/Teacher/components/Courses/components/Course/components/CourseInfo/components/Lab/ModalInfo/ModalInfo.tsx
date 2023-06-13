@@ -43,6 +43,7 @@ export const ModalInfo: React.FC<Props> = ({
   }, [open]);
 
   return (
+    // Модальное окно с проверкой домашнего задания
     <Modal
       open={open}
       onClose={onClose}

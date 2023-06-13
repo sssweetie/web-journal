@@ -32,6 +32,8 @@ export const ModalEditActivity = ({
   const [time, setTime] = useState<any>(moment());
 
   const { control, handleSubmit } = useForm();
+
+  // Перенос активности, когда форма подтверждается
   const onSubmit = async (data: any) => {
     const newActivity = {
       ...activity,
@@ -50,6 +52,7 @@ export const ModalEditActivity = ({
   };
 
   return (
+    // Окно для переноса расписания на другой день или время
     <Modal open={open} onClose={onClose}>
       <S.Wrapper onSubmit={handleSubmit(onSubmit)}>
         <LocalizationProvider dateAdapter={AdapterMoment}>

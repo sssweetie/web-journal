@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+//redux toolkit для получения лабораторных работ и дальнейшего их отображения в модальном окне
 
 const initialState = {
   id: null,

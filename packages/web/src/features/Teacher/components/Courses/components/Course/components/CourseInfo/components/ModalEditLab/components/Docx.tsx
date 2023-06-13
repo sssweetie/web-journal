@@ -12,9 +12,8 @@ import {
 } from 'docx';
 import { saveAs } from 'file-saver';
 import { numberMarkToString } from 'packages/web/src/utils';
-// Documents contain sections, you can have multiple sections per document, go here to learn more about sections
-// This simple example will only contain one section
 
+// Заголовки таблицы (названия)
 const tableHeader = [
   '№',
   'Фамилия, имя, отчество',
@@ -25,6 +24,7 @@ const tableHeader = [
   'Подпись преподавателя',
 ];
 
+// Заголовки таблицы (в документе)
 const th: any = tableHeader.map(
   (item: string) =>
     new TableCell({
@@ -34,7 +34,9 @@ const th: any = tableHeader.map(
     })
 );
 
+// Ведомость
 export const Docx = (statement: Student[]) => {
+  // Заполненная таблица значениями студентов
   const tbody = statement.map(
     (student: any, index: number) =>
       new TableRow({
@@ -94,6 +96,7 @@ export const Docx = (statement: Student[]) => {
       })
   );
 
+  // Сама таблица ведомости
   const table = new Table({
     rows: [
       new TableRow({
@@ -102,6 +105,8 @@ export const Docx = (statement: Student[]) => {
       ...tbody,
     ],
   });
+
+  // Footer ведомости
   const doc = new Document({
     compatibility: {
       spaceForUnderline: true,

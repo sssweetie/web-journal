@@ -1,6 +1,7 @@
 import { Homework } from '@web-journal/libs';
 
 export const getStudentsHomework = (res: any) => {
+  // Соединение студентов со сданными домашними работами
   const homework = res.lab.homework;
   const students = homework.map((hw: Homework) => {
     const student = res.students.find(

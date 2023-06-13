@@ -29,6 +29,7 @@ export const useCourse = (courseApi: CourseApi) => {
   const [students, setStudents] = useState<Student[]>([]);
   const params = useParams();
 
+  // Получение информации о курсе
   const getCourseInfo = async () => {
     try {
       setLoader(true);
@@ -41,6 +42,7 @@ export const useCourse = (courseApi: CourseApi) => {
     }
   };
 
+  // Получение информации о студентах
   const getStudents = async () => {
     const res = await courseApi.getStudents(
       location.pathname.slice(4, -29),
@@ -51,6 +53,8 @@ export const useCourse = (courseApi: CourseApi) => {
     setStudents(getStudentsHomework(res));
   };
 
+
+  // Получение информации о ведомостях
   const getStatement = async () => {
     try {
       if (courseInfo) {
@@ -70,6 +74,7 @@ export const useCourse = (courseApi: CourseApi) => {
           studentsGeneral.push(getStudentsHomework(res));
         }
 
+        // Подсчёт баллов студентов по всем лабораторным работам
         const mergedArray = studentsGeneral.reduce((result, currentArray) => {
           currentArray.forEach((studentToFind: any) => {
             const existingStudent = result.find(

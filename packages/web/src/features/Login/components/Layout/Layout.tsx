@@ -6,6 +6,7 @@ interface Props {
 }
 export const Layout = ({ loginForm }: Props) => {
   return (
+    // UI формы авторизации
     <>
       <HeaderBar></HeaderBar>
       {loginForm}

@@ -18,6 +18,7 @@ interface Props {
 export const LoginForm = ({ action }: Props) => {
   const { register, handleSubmit } = useFormLogin(action);
 
+  // Форма логинизации
   return (
     <S.Form onSubmit={handleSubmit}>
       <S.FormTitle>Вход</S.FormTitle>

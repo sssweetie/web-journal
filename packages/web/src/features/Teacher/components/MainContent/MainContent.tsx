@@ -15,6 +15,7 @@ export const MainContent = () => {
   const params = useParams();
 
   return (
+    // Главная страница
     <>
       <Link to={`/api/teacher/${params.teacherId}/courses`}>
         <S.Title>Мои курсы</S.Title>
@@ -22,7 +23,7 @@ export const MainContent = () => {
       <S.CoursesSection>
         {courses.map(
           (data: any, index: number) =>
-            index < 3 && <Course key={data.id} data={data} />
+            index < 3 && <Course key={data.id} data={data} /> // Отображение первых трех курсов в списке курсов
         )}
       </S.CoursesSection>
       <Link to={`/api/teacher/${params.teacherId}/calendar`}>
@@ -30,7 +31,10 @@ export const MainContent = () => {
       </Link>
       <S.Events>
         {upcomingActivities.map(
-          (upcomingActivity: Schedule, index: number) =>
+          (
+            upcomingActivity: Schedule,
+            index: number // Отображение первых четырех ближайших событий в расписании
+          ) =>
             index < 4 && (
               <UpcomingActivity
                 key={index}

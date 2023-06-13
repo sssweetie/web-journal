@@ -9,6 +9,7 @@ export const useTeacher = (teacherApi: TeacherApi) => {
   const params = useParams();
   const [teacher, setTeacher] = useState<any>({});
 
+  // Получение персональной информации о преподавателе
   const getPersonalInfo = async () => {
     try {
       const res = await teacherApi.getPersonalInfo(params.teacherId);

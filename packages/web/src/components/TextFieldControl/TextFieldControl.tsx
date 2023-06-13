@@ -9,7 +9,7 @@ interface Props {
   register: any;
   hidden?: boolean;
 }
-
+// Кастомизированное текстовое поле
 export const TextFieldControl = ({
   attachment,
   icon,

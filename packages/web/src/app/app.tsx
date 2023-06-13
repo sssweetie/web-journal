@@ -15,6 +15,8 @@ import { useAppSelector } from '../store/hooks';
 export function App() {
   const isLogged = useAppSelector((state) => state.user.isLogged);
   return (
+    // Маршрутизация всех URL'ов
+    // Если пользователь не залогинен, доступ будет только для логина. В иных случаях ошибка 401
     <S.Wrapper>
       <Routes>
         {isLogged ? (

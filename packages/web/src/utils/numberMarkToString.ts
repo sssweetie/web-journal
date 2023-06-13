@@ -1,4 +1,5 @@
 export const numberMarkToString = (mark: number) => {
+  // Конвертирование отметки студента в текстовый эквивалент
   if (mark < 61) {
     return 'Неуд.';
   } else if (mark >= 61 && mark < 76) {

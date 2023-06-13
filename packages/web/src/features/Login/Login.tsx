@@ -7,5 +7,6 @@ import { loginApi } from './loginApi';
 export const Login = () => {
   const { login, serverError } = useLogin(loginApi(httpClient));
 
+  // UI Формы логинизации
   return <Layout loginForm={<LoginForm action={{ login, serverError }} />} />;
 };

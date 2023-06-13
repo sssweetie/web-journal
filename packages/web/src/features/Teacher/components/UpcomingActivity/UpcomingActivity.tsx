@@ -13,6 +13,7 @@ export const UpcomingActivity = ({ upcomingActivity }: Props) => {
   );
 
   return (
+    // Ближайшие активности по расписанию
     <S.Wrapper $backgroundColor={backgroundColor} $borderColor={borderColor}>
       <S.Day>{upcomingActivity.startDate}</S.Day>
       <S.LessonName>{upcomingActivity.name}</S.LessonName>

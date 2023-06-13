@@ -22,6 +22,7 @@ export const ModalEditLab = ({ isOpen, onClose, labId, files }: Props) => {
   const { uploadDocument } = useModalLab(modalLabApi(httpClient));
   const location = useLocation();
 
+  // Считывание загруженного файла, для отправки на сервер
   const onSubmit = async (data: any) => {
     const reader = new FileReader();
     reader.readAsText(data.file[0]);
@@ -36,6 +37,7 @@ export const ModalEditLab = ({ isOpen, onClose, labId, files }: Props) => {
   };
 
   return (
+    // Модальное окно для редактирования информации о лабораторной работе
     <Modal open={isOpen} onClose={onClose}>
       <S.Wrapper onSubmit={handleSubmit(onSubmit)}>
         <h1>Лабораторная работа 1</h1>

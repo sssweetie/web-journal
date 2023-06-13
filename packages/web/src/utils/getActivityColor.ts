@@ -1,7 +1,7 @@
 export const getActivityColor = (type: string) => {
   let backgroundColor = '';
   let borderColor = '';
-
+  // Получение цвета для рамки и заднего фона в зависимости от типа активности
   switch (type) {
     case 'лаб':
       backgroundColor = '#96C6FF';

@@ -10,6 +10,7 @@ export const useCourses = (coursesApi: ICoursesApi) => {
 
   const params = useParams();
 
+  // Получение списка курсов
   const getCourses = async () => {
     try {
       const res = await coursesApi.getCourses(params.teacherId);

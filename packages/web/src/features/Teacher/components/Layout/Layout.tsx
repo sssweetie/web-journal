@@ -9,6 +9,7 @@ interface Props {
 
 export const Layout = ({ navBar, content }: Props) => {
   return (
+    //UI отображение главной страницы
     <>
       <HeaderBar />
       <S.Wrapper>
