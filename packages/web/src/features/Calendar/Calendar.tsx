@@ -1,102 +1,51 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import * as S from './styled';
+import { useCalendar } from './hooks/useCalendar';
+import { calendarApi } from './api/calendarApi';
+import { httpClient } from '../services/httpClient';
+import { generateCalendarDays } from '../../utils';
 import { SliderButtons } from '../../components/SliderButtons';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
+
 export const Calendar = () => {
-  const monthsName = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const daysName = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
-  const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const navigate = useNavigate();
+  const params = useParams();
+  const { activities, rescheduleActivity } = useCalendar(
+    calendarApi(httpClient)
+  );
 
-  const [activeDay, setActiveDay] = useState(new Date());
-  const year = activeDay.getFullYear();
-  const month = activeDay.getMonth();
-  const firstDay = new Date(year, month, 1).getDay(); //получили какой день недели у первого числа месяца
+  const [currentDate, setCurrentDate] = useState(moment());
 
-  const generateCalendar = () => {
-    const calendar: Array<Array<number | string>> = [];
-    calendar[0] = daysName; //Первая строка - месяца
-    let maxDays = daysInMonths[month]; //Получаем месяц и сколько в нём дней
-    if (month === 1) {
-      //Если это февраль, то учитывая високосный год
-      if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-        maxDays += 1;
-      }
-    }
-    let counter = 1;
-    for (let row = 1; row < 7; row++) {
-      calendar[row] = []; //создаём пустой массив недели
-      for (let col = 0; col < 7; col++) {
-        calendar[row][col] = -1; //сразу задаём -1 для тех значений, который не входят в месяц
-        if (row === 1 && col >= firstDay - 1) {
-          //если неделя первая, а колонка равна первому дню, то можно начинать отсчёт дней
-          calendar[row][col] = counter++;
-        } else if (row > 1 && counter <= maxDays) {
-          //или если неделя не первая, но мы не дошли до последнего дня, то увеличиваем дни
-          calendar[row][col] = counter++;
-        }
-      }
-    }
-    return calendar;
+  const weekdaysShort = moment.weekdaysShort();
+
+  const prevMonth = () => {
+    setCurrentDate(moment(currentDate).subtract(1, 'month'));
   };
 
-  const getPreviousNextMonth = (n: number) => {
-    setActiveDay((prevState) => {
-      const newDate = new Date();
-      newDate.setMonth(prevState.getMonth() + n);
-      return newDate;
-    });
+  const nextMonth = () => {
+    setCurrentDate(moment(currentDate).add(1, 'month'));
   };
 
   return (
-    <S.Wrapper>
-      <S.CurrentMonth>
-        <Link to="/api/teacher/main">{monthsName[month]}</Link>
-        <SliderButtons
-          leftButtonFunction={getPreviousNextMonth}
-          rightButtonFunction={getPreviousNextMonth}
-          leftButtonArg={-1}
-          rightButtonArg={1}
-        />
-      </S.CurrentMonth>
-
-      {generateCalendar().map((rowArray, rowIndex) => (
-        <S.Week>
-          {rowArray.map((day) => {
-            if (rowIndex === 0) {
-              return <S.FirstDays>{day}</S.FirstDays>;
-            } else if (
-              day === Number(activeDay.toString().split(' ')[2]) &&
-              activeDay.getMonth() === new Date().getMonth()
-            ) {
-              console.log(activeDay.toString());
-              return <S.TodayDay>{day}</S.TodayDay>;
-            } else {
-              return day !== -1 ? <S.Day>{day}</S.Day> : <div></div>;
-            }
-          })}
-        </S.Week>
-      ))}
-    </S.Wrapper>
+    <S.Calendar>
+      <S.CalendarHeader
+        onClick={() => navigate(`/api/teacher/${params.teacherId}/main`)}
+      >
+        {currentDate.format('MMMM YYYY')}
+      </S.CalendarHeader>
+      <SliderButtons
+        leftButtonFunction={prevMonth}
+        rightButtonFunction={nextMonth}
+      />
+      <S.WeekDays>
+        {weekdaysShort.map((weekday, index) => (
+          <S.WeekDay key={index}>{weekday}</S.WeekDay>
+        ))}
+      </S.WeekDays>
+      <S.CalendarBody>
+        {generateCalendarDays(currentDate, activities, rescheduleActivity)}
+      </S.CalendarBody>
+    </S.Calendar>
   );
 };

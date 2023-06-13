@@ -1,79 +1,35 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { MainContent } from './components/MainContent';
-import { Course } from './components/Course';
-import { PlannedEvent } from './components/PlannedEvent';
 import { NavBar } from './components/NavBar';
 import { useTeacher } from './hooks/useTeacher';
 import { httpClient } from '../services/httpClient';
 import { teacherApi } from './teacherApi';
-import { Courses, Wrapper, Title } from './components/MainContent/styled';
-import { Settings } from './components/Settings';
 
-export const Teacher = () => {
-  const courses = [
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-    { name: 'Eng', description: 'Some description' },
-  ];
-  const plannedEvents = [
-    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
-    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
-    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
-    { name: 'Utilization', date: 'MN 10:00', lesson: 'Lesson 6' },
-  ];
-  const settings = ['Main', 'Courses', 'Calendar', 'Settings'];
-  const personalInfo = {
-    name: 'Yarik',
-    status: 'Teacher',
-  };
-
+export const Teacher = ({ content }: any) => {
+  const params = useParams();
   const navigate = useNavigate();
+
+  const { teacher } = useTeacher(teacherApi(httpClient));
+
+  const settings = ['Main', 'Courses', 'Calendar', 'Settings'];
+
   const navigateHandler = (url: string) => {
     const urlCapitalize = url.toLocaleLowerCase();
-    navigate(`/api/teacher/${urlCapitalize}`);
+    navigate(`/api/teacher/${params.teacherId}/${urlCapitalize}`);
   };
 
-  const { getEvents, getLessons, getPersonalInfo, getSettings } = useTeacher(
-    teacherApi(httpClient)
-  );
-
   return (
+    // UI отображение настроек и главной страницы
     <Layout
+      content={content}
       navBar={
         <NavBar
           navigateHandler={navigateHandler}
-          personalInfo={personalInfo}
+          personalInfo={teacher}
           settings={settings}
         />
       }
-      mainContent={
-        <MainContent
-          courses={courses.map(
-            (course, index) => index < 3 && <Course course={course} />
-          )}
-          plannedEvents={plannedEvents.map(
-            (plannedEvent, index) =>
-              index < 4 && <PlannedEvent plannedEvent={plannedEvent} />
-          )}
-        />
-      }
-      courses={
-        <Wrapper>
-          <Title>My courses</Title>
-          <Courses>
-            {courses.map((course) => (
-              <Course course={course} />
-            ))}
-          </Courses>
-        </Wrapper>
-      }
-      settings={<Settings></Settings>}
     />
   );
 };

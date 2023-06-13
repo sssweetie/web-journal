@@ -1,23 +1,48 @@
-import React, { ReactNode } from 'react';
 import * as S from './styled';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { httpClient } from '../../../services/httpClient';
+import { Schedule } from '@web-journal/libs';
+import { useCourses } from '../Courses/hooks/useCourses';
+import { coursesApi } from '../Courses/api/coursesApi';
+import { useCalendar } from '../../../Calendar/hooks/useCalendar';
+import { calendarApi } from '../../../Calendar/api/calendarApi';
+import { Course } from '../Courses/components/Course';
+import { UpcomingActivity } from '../UpcomingActivity';
 
-interface Props {
-  courses: Array<ReactNode>;
-  plannedEvents: Array<ReactNode>;
-}
+export const MainContent = () => {
+  const { courses } = useCourses(coursesApi(httpClient));
+  const { upcomingActivities } = useCalendar(calendarApi(httpClient));
+  const params = useParams();
 
-export const MainContent = ({ courses, plannedEvents }: Props) => {
   return (
-    <S.Wrapper>
-      <Link to="/api/teacher/courses">
-        <S.Title>My Courses</S.Title>
+    // Главная страница
+    <>
+      <Link to={`/api/teacher/${params.teacherId}/courses`}>
+        <S.Title>Мои курсы</S.Title>
       </Link>
-      <S.Courses>{courses}</S.Courses>
-      <Link to="/api/teacher/Calendar">
-        <S.Title style={{ marginTop: '60px' }}>Event</S.Title>
+      <S.CoursesSection>
+        {courses.map(
+          (data: any, index: number) =>
+            index < 3 && <Course key={data.id} data={data} /> // Отображение первых трех курсов в списке курсов
+        )}
+      </S.CoursesSection>
+      <Link to={`/api/teacher/${params.teacherId}/calendar`}>
+        <S.Title style={{ marginTop: '60px' }}>Ближайшие события</S.Title>
       </Link>
-      <S.Events>{plannedEvents}</S.Events>
-    </S.Wrapper>
+      <S.Events>
+        {upcomingActivities.map(
+          (
+            upcomingActivity: Schedule,
+            index: number // Отображение первых четырех ближайших событий в расписании
+          ) =>
+            index < 4 && (
+              <UpcomingActivity
+                key={index}
+                upcomingActivity={upcomingActivity}
+              />
+            )
+        )}
+      </S.Events>
+    </>
   );
 };

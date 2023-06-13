@@ -1,17 +1,14 @@
 import React, { FormEvent } from 'react';
 import * as S from './styled';
-import { InputLabelIcon } from '../InputLabel';
 import PasswordIcon from '@mui/icons-material/Password';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Checkbox } from '@mui/material';
-import { loginApi } from '../../loginApi';
-import { httpClient } from '../../../services/httpClient';
 import { useFormLogin } from './hooks/useLoginForm';
 import { User } from '@web-journal/libs';
+import { TextFieldControl } from 'packages/web/src/components/TextFieldControl';
 
 export interface Action {
   login: (data: User) => Promise<void>;
-  isLogged: boolean;
+  serverError: string | undefined;
 }
 
 interface Props {
@@ -19,35 +16,29 @@ interface Props {
 }
 
 export const LoginForm = ({ action }: Props) => {
-  const agreement = `Я подтверждаю согласие на обработку 
-  персональных данных в соответствии с условиями Политики 
-  конфиденциальности , ознакомился и согласен с условиями 
-  Пользовательского соглашения`;
-
   const { register, handleSubmit } = useFormLogin(action);
 
+  // Форма логинизации
   return (
     <S.Form onSubmit={handleSubmit}>
-      <S.FormTitle>Log in</S.FormTitle>
-      <InputLabelIcon
+      <S.FormTitle>Вход</S.FormTitle>
+      <TextFieldControl
         register={register}
-        icon={<AccountCircle />}
         attachment="login"
+        icon={<AccountCircle />}
       >
-        User
-      </InputLabelIcon>
-      <InputLabelIcon
+        Логин
+      </TextFieldControl>
+      <TextFieldControl
         register={register}
-        icon={<PasswordIcon />}
         attachment="password"
+        hidden={true}
+        icon={<PasswordIcon />}
       >
-        Password
-      </InputLabelIcon>
-      <S.LoginButton>Log in</S.LoginButton>
-      <S.AgreementWrapper>
-        <Checkbox />
-        <S.AgreementP>{agreement}</S.AgreementP>
-      </S.AgreementWrapper>
+        Пароль
+      </TextFieldControl>
+      <S.LoginButton>Отправить</S.LoginButton>
+      {action.serverError && <S.Error>{action.serverError}</S.Error>}
     </S.Form>
   );
 };

@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
-import { LoginApi } from '../loginApi';
 import { User } from '@web-journal/libs';
 import { useNavigate } from 'react-router-dom';
+import { isAxiosError } from 'axios';
+import { useAppDispatch } from 'packages/web/src/store/hooks';
+import { loginUser } from '../../../store/slices/userSlice';
+export interface LoginApi {
+  login: (data: User) => Promise<string>;
+}
 
 export const useLogin = (loginApi: LoginApi) => {
-  const [isLogged, setIsLogged] = useState(false);
+  const [serverError, setServerError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
+  // Логинизация и статус авторизованного пользователя
   const login = async (data: User) => {
     try {
-      await loginApi.login(data);
-      setIsLogged(true);
-      navigate('/api/teacher/main');
+      const res = await loginApi.login(data);
+      dispatch(loginUser({ id: res, isLogged: true }));
+      navigate(`/api/teacher/${res}/main`);
     } catch (error) {
-      console.error(error);
+      if (isAxiosError(error)) {
+        setServerError(error.response!.data.message);
+      } else {
+        console.error(error);
+      }
     }
   };
 
-  return { login, isLogged };
+  return { login, serverError };
 };

@@ -1,40 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface TeacherApi {
-  getPersonalInfo: () => Promise<any>;
-  getLessons: () => Promise<any>;
-  getSettings: () => Promise<any>;
-  getEvents: () => Promise<any>;
+  getPersonalInfo: (id: string | undefined) => Promise<any>;
 }
 
 export const useTeacher = (teacherApi: TeacherApi) => {
+  const params = useParams();
+  const [teacher, setTeacher] = useState<any>({});
+
+  // Получение персональной информации о преподавателе
   const getPersonalInfo = async () => {
     try {
-      await teacherApi.getPersonalInfo();
+      const res = await teacherApi.getPersonalInfo(params.teacherId);
+      const teacher = {
+        courseData: res.courseData,
+        groups: res.groups,
+        teacher: res._doc,
+      };
+
+      setTeacher(teacher);
     } catch (err) {
       console.error(err);
     }
   };
-  const getLessons = async () => {
-    try {
-      await teacherApi.getLessons();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  const getSettings = async () => {
-    try {
-      await teacherApi.getSettings();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  const getEvents = async () => {
-    try {
-      await teacherApi.getEvents();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  return { getEvents, getSettings, getPersonalInfo, getLessons };
+
+  useEffect(() => {
+    getPersonalInfo();
+  }, []);
+
+  return { getPersonalInfo, teacher };
 };

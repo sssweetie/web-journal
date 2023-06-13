@@ -1,38 +1,59 @@
 import { Button, FormControl, Input, InputLabel } from '@mui/material';
-import React from 'react';
 import * as S from './styled';
+import { useTeacher } from '../../hooks/useTeacher';
+import { teacherApi } from '../../teacherApi';
+import { httpClient } from '../../../services/httpClient';
+import { useForm } from 'react-hook-form';
 
 export const Settings = () => {
+  const { teacher } = useTeacher(teacherApi(httpClient));
+  const { handleSubmit, register, setValue } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log('123');
+  };
+
   return (
-    <S.PageWrapper>
+    // Список настроек
+    <>
       <h3>Настройки</h3>
-      <S.FormWrapper>
+      <S.FormWrapper onSubmit={handleSubmit(onSubmit)}>
         <FormControl variant="standard" disabled>
-          <InputLabel htmlFor="person-name">Ваше имя</InputLabel>
-          <Input defaultValue=" " id="person-name"></Input>
+          <InputLabel htmlFor="firstName">Имя</InputLabel>
+          <Input {...register('firstName')} id="firstName" />
+        </FormControl>
+        <FormControl variant="standard" disabled>
+          <InputLabel htmlFor="lastName">Фамилия</InputLabel>
+          <Input {...register('lastName')} id="lastName" />
+        </FormControl>
+        <FormControl variant="standard" disabled>
+          <InputLabel htmlFor="surname">Отчество</InputLabel>
+          <Input {...register('surname')} id="surname" />
         </FormControl>
         <FormControl variant="standard" disabled>
           <InputLabel htmlFor="sex">Пол</InputLabel>
-          <Input defaultValue=" " id="sex"></Input>
-        </FormControl>
-        <FormControl variant="standard" disabled>
-          <InputLabel htmlFor="secondName">Фамилия</InputLabel>
-          <Input defaultValue=" " id="secondName"></Input>
+          <Input {...register('sex')} id="sex" />
         </FormControl>
         <FormControl variant="standard" disabled>
           <InputLabel htmlFor="birthday">Дата рождения</InputLabel>
-          <Input defaultValue=" " id="birthday"></Input>
+          <Input {...register('birthday')} id="birthday" />
         </FormControl>
         <FormControl variant="standard">
           <InputLabel htmlFor="telephone">Телефон</InputLabel>
-          <Input defaultValue=" " id="telephone"></Input>
+          <Input {...register('telephone')} id="telephone" />
         </FormControl>
-        <Button variant="contained">Save</Button>
         <FormControl variant="standard">
           <InputLabel htmlFor="mail">Почта</InputLabel>
-          <Input defaultValue=" " id="mail"></Input>
+          <Input {...register('mail')} id="mail" />
+        </FormControl>
+        <FormControl variant="standard" disabled>
+          <InputLabel htmlFor="link">Ссылка</InputLabel>
+          <Input {...register('link')} id="link" />
         </FormControl>
       </S.FormWrapper>
-    </S.PageWrapper>
+      <Button style={{ width: '270px', marginTop: '20px' }} variant="contained">
+        Save
+      </Button>
+    </>
   );
 };

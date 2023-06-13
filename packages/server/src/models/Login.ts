@@ -11,6 +11,7 @@ const loginSchema = new Schema<User>(
       type: String,
       required: true,
     },
+    teacherId: String,
   },
   { collection: 'users' }
 );

@@ -1,0 +1,1 @@
+export { Docx } from './Docx';
