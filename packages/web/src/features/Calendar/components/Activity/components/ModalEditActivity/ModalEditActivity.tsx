@@ -64,6 +64,7 @@ export const ModalEditActivity = ({
             rules={{ required: true }}
             render={({ field }) => (
               <TextField
+                required
                 defaultValue={activity.cab}
                 label="Кабинет"
                 {...field}

@@ -9,6 +9,7 @@ import { modalLabApi } from './api/modalLabApi';
 import { httpClient } from 'packages/web/src/features/services/httpClient';
 import { useLocation } from 'react-router-dom';
 import { FileDB } from '@web-journal/libs';
+import { text } from 'stream/consumers';
 
 interface Props {
   isOpen: boolean;
@@ -26,14 +27,19 @@ export const ModalEditLab = ({ isOpen, onClose, labId, files }: Props) => {
   const onSubmit = async (data: any) => {
     const reader = new FileReader();
     reader.readAsText(data.file[0]);
-    reader.onload = async () => {
-      const fileData = reader.result;
-      await uploadDocument(
-        { name: data.file[0].name, data: String(fileData) },
-        labId,
-        location.pathname.slice(4)
-      );
-    };
+
+    if (data.file[0].type !== 'text/plain') {
+      alert('File format is not corrected');
+    } else {
+      reader.onload = async () => {
+        const fileData = reader.result;
+        await uploadDocument(
+          { name: data.file[0].name, data: String(fileData) },
+          labId,
+          location.pathname.slice(4)
+        );
+      };
+    }
   };
 
   return (
@@ -44,10 +50,12 @@ export const ModalEditLab = ({ isOpen, onClose, labId, files }: Props) => {
         <TextField
           {...register('description', { required: true })}
           label="Описание"
+          required
         />
         <TextField
           {...register('maxMark', { required: true })}
           label="Максимальный балл"
+          required
         />
         <S.FilesWrapper>
           {files.map((file: FileDB) => (
